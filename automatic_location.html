@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Assistance - Location Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        #location-info {
+            padding: 15px;
+            background-color: #f8d7da ;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            color: #00796b;
+        }
+
+        #nearby-medical-centers {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .center-info {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .center-info h4 {
+            color: #00796b;
+        }
+
+        header {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            padding: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        header img {
+            height: 50px;
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            color: #D32F2F;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #D32F2F;
+            margin: 0;
+        }
+
+        .center-info p {
+            margin: 5px 0;
+        }
+
+        .center-info a {
+            color: #00796b;
+            text-decoration: none;
+            border: 1px solid #00796b;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .center-info a:hover {
+            background-color: #00796b;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- Add your logo here -->
+        <img src="logo.png" alt="Logo">
+        <div>
+            <h1>HelpNow</h1>
+            <p>First Aid Help at Your Fingertips</p>
+        </div>
+    </header>
+
+<h2>Emergency Assistance Based on Your Location</h2>
+
+<div id="location-info">
+    <p><strong>Fetching your current location...</strong></p>
+</div>
+
+<div id="nearby-medical-centers">
+    <!-- Nearby medical center information will be displayed here -->
+</div>
+
+<script>
+    // Function to get the user's location
+    function getUserLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showLocation, showError);
+        } else {
+            document.getElementById('location-info').innerHTML = 'Geolocation is not supported by this browser.';
+        }
+    }
+
+    // Show location and nearby medical centers
+    function showLocation(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        
+        // Display the user's location
+        document.getElementById('location-info').innerHTML = `
+            <p><strong>Your Location:</strong> Latitude: ${lat}, Longitude: ${lon}</p>
+            <p>We will find nearby medical centers for you.</p>
+        `;
+
+        // Example data for nearby hospitals (This could be fetched from a real API)
+        const nearbyCenters = [
+            { name: 'City General Hospital', distance: '1.2 km', phone: '+91 80 1234 5678', ambulance: '+91 80 9876 5432', address: '123 Main Street, Bangalore' },
+            { name: 'Care Plus Medical Center', distance: '2.5 km', phone: '+91 80 2345 6789', ambulance: '+91 80 1122 3344', address: '456 Care Avenue, Bangalore' },
+            { name: 'Green Valley Hospital', distance: '3.1 km', phone: '+91 80 3456 7890', ambulance: '+91 80 5566 7788', address: '789 Green Valley Road, Bangalore' },
+            { name: 'Sunrise Medical Clinic', distance: '4.2 km', phone: '+91 80 4567 8901', ambulance: '+91 80 6677 8899', address: '321 Sunrise Street, Bangalore' }
+        ];
+
+        let centerInfoHTML = '<h3>Nearby Medical Centers</h3>';
+        nearbyCenters.forEach(center => {
+            centerInfoHTML += `
+                <div class="center-info">
+                    <h4>${center.name}</h4>
+                    <p><strong>Contact:</strong> ${center.phone}</p>
+                    <p><strong>Address:</strong> ${center.address}</p>
+                    <p><strong>Distance:</strong> ${center.distance}</p>
+                    <p><strong>Ambulance:</strong> ${center.ambulance}</p>
+                    <a href="https://www.google.com/maps/search/?q=${center.address}" target="_blank">Get Directions</a>
+                </div>
+            `;
+        });
+        
+        document.getElementById('nearby-medical-centers').innerHTML = centerInfoHTML;
+    }
+
+    // Show error if location can't be fetched
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                document.getElementById('location-info').innerHTML = "User denied the request for Geolocation.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                document.getElementById('location-info').innerHTML = "Location information is unavailable.";
+                break;
+            case error.TIMEOUT:
+                document.getElementById('location-info').innerHTML = "The request to get user location timed out.";
+                break;
+            case error.UNKNOWN_ERROR:
+                document.getElementById('location-info').innerHTML = "An unknown error occurred.";
+                break;
+        }
+    }
+
+    // Call the function to get the user's location
+    getUserLocation();
+</script>
+
+</body>
+</html>

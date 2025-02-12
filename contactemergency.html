@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Emergency Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .service {
+            background-color: #f2f2f2;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .service h2 {
+            margin: 0;
+            color: #d9534f;
+        }
+
+        .service p {
+            margin: 8px 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .service button {
+            background-color: #8B0000;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .service button:hover {
+            background-color: #f8d7da;
+        }
+
+        .details {
+            font-size: 14px;
+            color: #555;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Contact Emergency Services</h1>
+
+        <div class="service">
+            <h2>Police</h2>
+            <p>Emergency Number: <strong>100</strong></p>
+            <p>Service Available: 24/7</p>
+            <p class="details"><strong>Description:</strong> The Police handle all law enforcement, including crime, traffic violations, and public safety.</p>
+            <p class="details"><strong>Address:</strong> Police Station, Main Street, City</p>
+            <p class="details"><strong>Response Time:</strong> Approximately 10 minutes</p>
+            <p class="details"><strong>Alternate Contact:</strong> 123-456-7890 (Non-urgent inquiries)</p>
+            <button onclick="callService('100')">Call Police</button>
+        </div>
+
+        <div class="service">
+            <h2>Fire Department</h2>
+            <p>Emergency Number: <strong>101</strong></p>
+            <p>Service Available: 24/7</p>
+            <p class="details"><strong>Description:</strong> The Fire Department handles all fire-related emergencies, including fire outbreaks and rescues from burning buildings.</p>
+            <p class="details"><strong>Address:</strong> Fire Department, 2nd Avenue, City</p>
+            <p class="details"><strong>Response Time:</strong> Approximately 8 minutes</p>
+            <p class="details"><strong>Alternate Contact:</strong> 234-567-8901 (For non-urgent matters)</p>
+            <button onclick="callService('101')">Call Fire Department</button>
+        </div>
+
+        <div class="service">
+            <h2>Ambulance</h2>
+            <p>Emergency Number: <strong>102</strong></p>
+            <p>Service Available: 24/7</p>
+            <p class="details"><strong>Description:</strong> Ambulance services provide emergency medical care and transportation to hospitals for patients in critical conditions.</p>
+            <p class="details"><strong>Address:</strong> Ambulance Headquarters, Park Lane, City</p>
+            <p class="details"><strong>Response Time:</strong> Approximately 5 minutes</p>
+            <p class="details"><strong>Alternate Contact:</strong> 345-678-9012 (For medical consultation)</p>
+            <button onclick="callService('102')">Call Ambulance</button>
+        </div>
+
+        <div class="service">
+            <h2>Rescue Services</h2>
+            <p>Emergency Number: <strong>103</strong></p>
+            <p>Service Available: 24/7</p>
+            <p class="details"><strong>Description:</strong> Rescue services provide assistance during accidents, natural disasters, and emergency evacuations.</p>
+            <p class="details"><strong>Address:</strong> Rescue Service HQ, River Road, City</p>
+            <p class="details"><strong>Response Time:</strong> Approximately 15 minutes</p>
+            <p class="details"><strong>Alternate Contact:</strong> 456-789-0123 (For queries)</p>
+            <button onclick="callService('103')">Call Rescue Services</button>
+        </div>
+
+        <div class="service">
+            <h2>Disaster Management</h2>
+            <p>Emergency Number: <strong>104</strong></p>
+            <p>Service Available: 24/7</p>
+            <p class="details"><strong>Description:</strong> Disaster management services offer assistance during earthquakes, floods, and other major disasters.</p>
+            <p class="details"><strong>Address:</strong> Disaster Management Center, Disaster Lane, City</p>
+            <p class="details"><strong>Response Time:</strong> Approximately 20 minutes</p>
+            <p class="details"><strong>Alternate Contact:</strong> 567-890-1234 (For disaster alerts)</p>
+            <button onclick="callService('104')">Call Disaster Management</button>
+        </div>
+
+        <div class="service">
+            <h2>Poison Control</h2>
+            <p>Emergency Number: <strong>105</strong></p>
+            <p>Service Available: 24/7</p>
+            <p class="details"><strong>Description:</strong> Poison control services provide immediate advice and assistance for poisoning incidents.</p>
+            <p class="details"><strong>Address:</strong> Poison Control Center, Health Street, City</p>
+            <p class="details"><strong>Response Time:</strong> Immediate response</p>
+            <p class="details"><strong>Alternate Contact:</strong> 678-901-2345 (For non-urgent poison inquiries)</p>
+            <button onclick="callService('105')">Call Poison Control</button>
+        </div>
+
+        <div class="service">
+            <h2>Coast Guard</h2>
+            <p>Emergency Number: <strong>106</strong></p>
+            <p>Service Available: 24/7</p>
+            <p class="details"><strong>Description:</strong> The Coast Guard provides maritime rescue services and assistance during emergencies at sea.</p>
+            <p class="details"><strong>Address:</strong> Coast Guard Base, Beach Road, City</p>
+            <p class="details"><strong>Response Time:</strong> Approximately 30 minutes</p>
+            <p class="details"><strong>Alternate Contact:</strong> 789-012-3456 (For marine emergencies)</p>
+            <button onclick="callService('106')">Call Coast Guard</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Function to simulate a call to the emergency service
+        function callService(serviceNumber) {
+            alert(`Calling emergency service number: ${serviceNumber}`);
+            // In real-world usage, you would integrate phone call functionality or another action
+        }
+    </script>
+
+</body>
+</html>

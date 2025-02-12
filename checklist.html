@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Aid Checklist</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f8d7da; /* Light red background */
+    padding: 20px;
+    margin: 0;
+}
+    header {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            padding: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        header img {
+            height: 50px;
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            color: #D32F2F;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #D32F2F;
+            margin: 0;
+        }
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+select, button {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.steps {
+    background-color: #f8d7da; /* Light red background */
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 16px;
+    display: none;
+}
+
+.steps h3 {
+    color: #721c24; /* Dark red color */
+}
+
+.steps ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.steps ul li {
+    background-color: transparent;
+    padding: 8px;
+    margin: 5px 0;
+    border: none;
+    color: #721c24; /* Dark red text */
+}
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- Add your logo here -->
+        <img src="logo.png" alt="Logo">
+        <div>
+            <h1>HelpNow</h1>
+            <p>First Aid Help at Your Fingertips</p>
+        </div>
+    </header>
+    <div class="container">
+        <h1>First Aid Checklist</h1>
+        
+        <!-- Dropdown to select a first aid situation -->
+        <select id="emergencySelect">
+            <option value="">Select an Emergency Situation</option>
+            <option value="CPR">CPR (Cardiopulmonary Resuscitation)</option>
+            <option value="Bleeding">Severe Bleeding</option>
+            <option value="Burn">Burns</option>
+            <option value="Choking">Choking</option>
+            <option value="Fracture">Fracture</option>
+            <option value="HeartAttack">Heart Attack</option>
+            <option value="Stroke">Stroke</option>
+            <option value="Poison">Poisoning</option>
+            <option value="Seizure">Seizure</option>
+            <option value="Shock">Shock</option>
+            <option value="Fainting">Fainting</option>
+            <option value="Hypothermia">Hypothermia</option>
+            <option value="Heatstroke">Heatstroke</option>
+            <option value="Asthma">Asthma Attack</option>
+            <option value="AllergicReaction">Allergic Reaction</option>
+            <option value="EyeInjury">Eye Injury</option>
+            <option value="SnakeBite">Snake Bite</option>
+            <option value="InsectBite">Insect Bite</option>
+            <option value="ElectricShock">Electric Shock</option>
+            <option value="Drowning">Drowning</option>
+            <option value="PoisoningIngestion">Poisoning (Ingestion)</option>
+            <option value="DogBite">Dog Bite</option>
+            <option value="SpiderBite">Spider Bite</option>
+            <option value="HeartFailure">Heart Failure</option>
+            <option value="Hypoglycemia">Hypoglycemia (Low Blood Sugar)</option>
+            <option value="Hyperglycemia">Hyperglycemia (High Blood Sugar)</option>
+            <option value="Hernia">Hernia</option>
+            <option value="StrokeTransient">Transient Ischemic Attack (TIA)</option>
+            <option value="SevereDehydration">Severe Dehydration</option>
+            <option value="SevereAllergicReaction">Severe Allergic Reaction</option>
+            <option value="CarAccident">Car Accident</option>
+            <option value="BurnChemical">Chemical Burn</option>
+            <option value="FractureArm">Fractured Arm</option>
+            <option value="FractureLeg">Fractured Leg</option>
+            <option value="Concussion">Concussion</option>
+            <option value="HeatExhaustion">Heat Exhaustion</option>
+            <option value="ChildChoking">Child Choking</option>
+            <option value="StabWound">Stab Wound</option>
+            <option value="InhalationInjury">Inhalation Injury</option>
+            <option value="Appendicitis">Appendicitis</option>
+            <option value="Nosebleed">Nosebleed</option>
+            <option value="BurnElectrical">Electrical Burn</option>
+            <option value="Hyperthermia">Hyperthermia</option>
+            <option value="PanicAttack">Panic Attack</option>
+            <option value="HeatRash">Heat Rash</option>
+            <option value="Hyperventilation">Hyperventilation</option>
+            <option value="FoodPoisoning">Food Poisoning</option>
+            <option value="Hives">Hives</option>
+            <option value="Frostbite">Frostbite</option>
+            <option value="SevereBackPain">Severe Back Pain</option>
+            <option value="ChestPain">Chest Pain</option>
+        </select>
+
+        <!-- Button to show first aid steps -->
+        <button onclick="showFirstAidSteps()">Get First Aid Steps</button>
+
+        <!-- Section to show first aid steps -->
+        <div class="steps" id="firstAidSteps">
+            <h3>First Aid Steps for <span id="emergencyTitle"></span>:</h3>
+            <ul id="stepsList"></ul>
+        </div>
+    </div>
+
+    <script>
+        const firstAidData = {
+            CPR: {
+                title: "CPR (Cardiopulmonary Resuscitation)",
+                steps: [
+                    "Ensure the person is not breathing or has no pulse.",
+                    "Call for emergency help (911 or local emergency number).",
+                    "Begin chest compressions (30 compressions, then 2 rescue breaths).",
+                    "Continue until medical professionals arrive."
+                ]
+            },
+            Bleeding: {
+                title: "Severe Bleeding",
+                steps: [
+                    "Apply direct pressure on the wound using a clean cloth.",
+                    "Elevate the bleeding area (if possible).",
+                    "If bleeding continues, apply more pressure and call for help.",
+                    "For arterial bleeding, apply pressure to the pressure point closest to the wound."
+                ]
+            },
+            Burn: {
+                title: "Burns (First-degree, Second-degree, and Third-degree)",
+                steps: [
+                    "For first-degree burns: Cool with running water for 10 minutes, cover with a clean bandage.",
+                    "For second-degree burns: Cool with water and cover with a sterile bandage. Seek medical attention.",
+                    "For third-degree burns: Do not remove burnt clothing. Cover the area with a clean cloth and seek immediate medical assistance."
+                ]
+            },
+            Choking: {
+                title: "Choking",
+                steps: [
+                    "Encourage the person to cough if they can.",
+                    "If unable to breathe, perform the Heimlich maneuver: Stand behind the person, place a fist just above their navel, and give quick, inward and upward thrusts.",
+                    "Continue until the obstruction is cleared or emergency help arrives."
+                ]
+            },
+            Fracture: {
+                title: "Fractures (Broken Bones)",
+                steps: [
+                    "Immobilize the injured part by applying a splint or making the person stay still.",
+                    "Apply an ice pack (if available) to reduce swelling.",
+                    "Call for medical assistance, especially if the bone is visible or there is severe pain."
+                ]
+            },
+            HeartAttack: {
+                title: "Heart Attack",
+                steps: [
+                    "Call for emergency help immediately.",
+                    "Keep the person calm and let them sit down.",
+                    "If they are conscious, give them an aspirin to chew (unless allergic)."
+                ]
+            },
+            Stroke: {
+                title: "Stroke",
+                steps: [
+                    "Recognize the symptoms: sudden numbness, confusion, trouble seeing or speaking.",
+                    "Call for emergency help immediately.",
+                    "Do not give the person food or drink.",
+                    "Keep the person calm and monitor their symptoms until help arrives."
+                ]
+            },
+            Poison: {
+                title: "Poisoning",
+                steps: [
+                    "Call poison control or emergency services immediately.",
+                    "Do not induce vomiting unless directed by a medical professional.",
+                    "If the person is unconscious, do not attempt to give them anything orally."
+                ]
+            },
+            Seizure: {
+                title: "Seizure",
+                steps: [
+                    "Stay calm and clear the area around the person to avoid injury.",
+                    "Do not attempt to hold them down or put anything in their mouth.",
+                    "After the seizure, help the person to a safe position and ensure they are breathing."
+                ]
+            },
+            Shock: {
+                title: "Shock",
+                steps: [
+                    "Lay the person down with their legs elevated.",
+                    "Keep the person warm with a blanket.",
+                    "Call for emergency help immediately."
+                ]
+            },
+            // Adding more situations (you can expand it similarly)
+            Hypothermia: {
+                title: "Hypothermia",
+                steps: [
+                    "Move the person to a warmer area.",
+                    "Remove wet clothing and replace with dry clothes or blankets.",
+                    "Offer warm drinks if the person is conscious. Seek immediate medical attention."
+                ]
+            },
+            Heatstroke: {
+                title: "Heatstroke",
+                steps: [
+                    "Move the person to a cool, shaded area.",
+                    "Give them cool (not cold) water to drink if they are conscious.",
+                    "Apply cool compresses to their body. Call for medical help immediately."
+                ]
+            }
+        };
+
+        function showFirstAidSteps() {
+            const emergency = document.getElementById("emergencySelect").value;
+            const firstAidStepsDiv = document.getElementById("firstAidSteps");
+            const titleElement = document.getElementById("emergencyTitle");
+            const stepsListElement = document.getElementById("stepsList");
+
+            if (emergency && firstAidData[emergency]) {
+                firstAidStepsDiv.style.display = 'block';
+                titleElement.textContent = firstAidData[emergency].title;
+                stepsListElement.innerHTML = '';
+                firstAidData[emergency].steps.forEach(step => {
+                    const li = document.createElement("li");
+                    li.textContent = step;
+                    stepsListElement.appendChild(li);
+                });
+            } else {
+                firstAidStepsDiv.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

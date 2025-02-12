@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback - HelpNow</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: white;
+    }
+
+    header {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .branding h1 {
+      margin: 0;
+      color: #d32f2f;
+      font-size: 2rem;
+    }
+
+    .branding p {
+      margin: 5px 0 0;
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    /* Feedback Form Section */
+    .feedback-container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .feedback-container h2 {
+      color: #d32f2f;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .feedback-container p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .feedback-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: stretch;
+    }
+
+    .feedback-container input,
+    .feedback-container textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .feedback-container textarea {
+      height: 120px;
+      resize: none;
+    }
+
+    .feedback-container button {
+      padding: 10px 20px;
+      background-color: #d32f2f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
+    }
+
+    .feedback-container button:hover {
+      background-color: #b71c1c;
+    }
+
+    .feedback-container .back-home {
+      margin-top: 20px;  /* Added space between buttons */
+      text-decoration: none;
+      color: white;
+      background-color: #d32f2f;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 1rem;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
+    }
+
+    .feedback-container .back-home:hover {
+      background-color: #b71c1c;
+    }
+
+    /* Notification Styles */
+    .thank-you-msg {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #d32f2f;
+      color: white;
+      border-radius: 5px;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <div class="logo-space"></div> <!-- Space for the logo -->
+      <div class="branding">
+        <h1>HelpNow</h1>
+        <p>First Aid Help at Your Fingertips</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="feedback-container">
+      <h2>Feedback</h2>
+      <p>We value your thoughts and suggestions! Please fill out the form below to let us know how we're doing.</p>
+      <form
+  action="https://formspree.io/f/xbljvqkz"
+  method="POST"
+>
+  <label>
+    Your name:
+    <input type="name" name="name">
+  </label>
+  <label>
+    Your email:
+    <input type="email" name="email">
+  </label>
+  <label>
+    Your message:
+    <textarea name="message"></textarea>
+  </label>
+  <!-- your other form fields go here -->
+  <button type="submit">Send</button>
+</form>
+      <a href="index.html" class="back-home">Back to Home</a>
+      <div id="thank-you-msg" class="thank-you-msg">Thank you! Your feedback has been submitted successfully.</div>
+    </div>
+  </main>
+
+  <script>
+    // Show thank you message after form submission
+    const form = document.getElementById("feedback-form");
+    form.addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form from submitting traditionally
+
+      // Show thank you message
+      document.getElementById("thank-you-msg").style.display = "block";
+
+      // Reset the form
+      form.reset();
+    });
+  </script>
+</body>
+</html>

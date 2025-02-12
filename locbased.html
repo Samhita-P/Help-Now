@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location-Based First Aid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+        }
+        .header #logo {
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .header #tagline {
+            font-size: 18px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .button-container button {
+            background-color: #f44336;
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 300px;
+            margin: 10px;
+        }
+        .button-container button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div id="logo">HelpNow</div>
+        <div id="tagline">First Aid Help at Your Fingertips</div>
+    </div>
+
+    <div class="content">
+        <h2>Location-Based First Aid Features</h2>
+        <div class="button-container">
+            <button onclick="window.location.href='automatic_location.html'">Automatic Location Detection</button>
+            <button onclick="window.location.href='nearby_medical_centers.html'">Nearby Medical Centers</button>
+            <button onclick="window.location.href='emergency_numbers.html'">Emergency Numbers Based on Region</button>
+            <button onclick="window.location.href='localized_first_aid.html'">Localized First Aid Guides</button>
+            <button onclick="window.location.href='weather_related_first_aid.html'">Weather-Related First Aid</button>
+            <button onclick="window.location.href='ambulance.html'">Nearby Ambulance/Rescue Services</button>
+            <button onclick="window.location.href='emergency_alert.html'">Emergency Alerts/Notifications</button>
+        </div>
+    </div>
+
+</body>
+</html>

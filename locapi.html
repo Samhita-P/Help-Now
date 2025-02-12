@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Based Ambulance Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+        }
+        select {
+            font-size: 16px;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .service-list {
+            display: none;
+            margin: 20px auto;
+            max-width: 900px;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+        }
+        .service {
+            background-color: #ffcccc;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .service h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .service p {
+            margin: 5px 0;
+        }
+        .service button {
+            padding: 10px;
+            background-color: #ff3b3b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .service button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with Logo and Tagline -->
+    <div class="header">
+        <div id="logo">HelpNow</div>
+        <div id="tagline">First Aid Help at Your Fingertips</div>
+    </div>
+
+    <!-- Region Selection -->
+    <div style="text-align:center; margin-top:30px;">
+        <label for="city-select">Select Your Region:</label>
+        <select id="city-select" onchange="showAmbulanceServices()">
+            <option value="">--Select City--</option>
+            <option value="bangalore">Bangalore</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="chennai">Chennai</option>
+            <option value="hyderabad">Hyderabad</option>
+            <option value="kochi">Kochi</option>
+            <!-- Add more cities as needed -->
+        </select>
+    </div>
+
+    <!-- Ambulance Services List -->
+    <div id="ambulance-services" class="service-list">
+        <h2>Top 10 Ambulance Services</h2>
+        <div id="services-container"></div>
+    </div>
+
+    <script>
+        // Static data for each city - you can later replace this with real API data
+        const ambulanceData = {
+            bangalore: [
+                { hospital: "St. John's Hospital", phone: "080-12345678" },
+                { hospital: "Bangalore Medical College", phone: "080-23456789" },
+                { hospital: "Manipal Hospital", phone: "080-34567890" },
+                { hospital: "Fortis Hospital", phone: "080-45678901" },
+                { hospital: "Narayana Health", phone: "080-56789012" },
+                { hospital: "Sakra Premium Hospital", phone: "080-67890123" },
+                { hospital: "Cloudnine Hospital", phone: "080-78901234" },
+                { hospital: "Koshys Hospital", phone: "080-89012345" },
+                { hospital: "Rajarajeshwari Medical College", phone: "080-90123456" },
+                { hospital: "Vydehi Hospital", phone: "080-01234567" }
+            ],
+            mumbai: [
+                { hospital: "Kokilaben Dhirubhai Ambani Hospital", phone: "022-12345678" },
+                { hospital: "Leelavati Hospital", phone: "022-23456789" },
+                { hospital: "Breach Candy Hospital", phone: "022-34567890" },
+                { hospital: "Lilavati Hospital", phone: "022-45678901" },
+                { hospital: "Jaslok Hospital", phone: "022-56789012" },
+                { hospital: "Hiranandani Hospital", phone: "022-67890123" },
+                { hospital: "Mumbai Heart Institute", phone: "022-78901234" },
+                { hospital: "Fortis Hospital", phone: "022-89012345" },
+                { hospital: "Wockhardt Hospital", phone: "022-90123456" },
+                { hospital: "The Medical Trust Hospital", phone: "022-01234567" }
+            ],
+            chennai: [
+                { hospital: "Apollo Hospitals", phone: "044-12345678" },
+                { hospital: "Fortis Malar Hospital", phone: "044-23456789" },
+                { hospital: "MIOT International Hospital", phone: "044-34567890" },
+                { hospital: "Kavery Hospital", phone: "044-45678901" },
+                { hospital: "Government General Hospital", phone: "044-56789012" },
+                { hospital: "Gleneagles Global Health City", phone: "044-67890123" },
+                { hospital: "St. Isabel's Hospital", phone: "044-78901234" },
+                { hospital: "Sree Balaji Medical College", phone: "044-89012345" },
+                { hospital: "Vijaya Hospital", phone: "044-90123456" },
+                { hospital: "SIMS Hospital", phone: "044-01234567" }
+            ],
+            // Add data for other cities as required
+        };
+
+        // Show ambulance services based on selected region
+        function showAmbulanceServices() {
+            const city = document.getElementById("city-select").value;
+            const servicesContainer = document.getElementById("services-container");
+            const ambulanceServices = document.getElementById("ambulance-services");
+
+            // Clear previous data
+            servicesContainer.innerHTML = "";
+
+            if (city && ambulanceData[city]) {
+                // Show ambulance services
+                ambulanceServices.style.display = "block";
+                ambulanceData[city].forEach((service, index) => {
+                    const serviceDiv = document.createElement("div");
+                    serviceDiv.classList.add("service");
+
+                    serviceDiv.innerHTML = `
+                        <h3>${index + 1}. ${service.hospital}</h3>
+                        <p>Phone: ${service.phone}</p>
+                        <button onclick="callAmbulance('${service.phone}')">Call Ambulance</button>
+                    `;
+                    servicesContainer.appendChild(serviceDiv);
+                });
+            } else {
+                ambulanceServices.style.display = "none";
+            }
+        }
+
+        // Function to call the ambulance (could be linked to phone dialer)
+        function callAmbulance(phoneNumber) {
+            window.location.href = `tel:${phoneNumber}`;
+        }
+    </script>
+
+</body>
+</html>

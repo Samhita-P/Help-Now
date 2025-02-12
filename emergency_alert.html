@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Alerts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        header {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            padding: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        header img {
+            height: 50px;
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            color: #D32F2F;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #D32F2F;
+            margin: 0;
+        }
+        h1 {
+            color: #2C3E50;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #E74C3C;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #C0392B;
+        }
+        .alert {
+            background-color: #F44336;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+        <!-- Add your logo here -->
+        <img src="logo.png" alt="Logo">
+        <div>
+            <h1>HelpNow</h1>
+            <p>First Aid Help at Your Fingertips</p>
+        </div>
+    </header>
+    <h1>Emergency Alert System</h1>
+
+    <div class="form-container">
+        <label for="emergencyType">Emergency Type:</label>
+        <select id="emergencyType">
+            <option value="Medical">Medical</option>
+            <option value="Fire">Fire</option>
+            <option value="Accident">Accident</option>
+            <option value="Natural Disaster">Natural Disaster</option>
+        </select>
+
+        <label for="severity">Severity:</label>
+        <select id="severity">
+            <option value="Critical">Critical</option>
+            <option value="High">High</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Low">Low</option>
+        </select>
+
+        <label for="symptoms">Symptoms/Details:</label>
+        <textarea id="symptoms" rows="4"></textarea>
+
+        <button onclick="submitAlert()">Send Alert</button>
+    </div>
+
+    <div class="alert" id="alertBox">
+        <strong>Emergency Alert:</strong>
+        <p id="alertDetails"></p>
+    </div>
+
+    <script>
+        function submitAlert() {
+            var emergencyType = document.getElementById('emergencyType').value;
+            var severity = document.getElementById('severity').value;
+            var symptoms = document.getElementById('symptoms').value;
+
+            // Creating alert message
+            var alertMessage = `
+                Emergency Type: ${emergencyType} <br>
+                Severity: ${severity} <br>
+                Symptoms/Details: ${symptoms}
+            `;
+
+            // Displaying the alert
+            document.getElementById('alertDetails').innerHTML = alertMessage;
+            document.getElementById('alertBox').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>

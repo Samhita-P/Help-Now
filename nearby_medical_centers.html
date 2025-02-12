@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Medical Centers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .medical-center {
+            background-color: #f8d7da; /* Initial light blue background */
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .medical-center h3 {
+            margin-top: 0;
+            color: #005f5f;
+        }
+
+        .medical-center p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .medical-center a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .medical-center a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 16px;
+            color: green;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Nearby Medical Centers</h2>
+
+    <div class="medical-center">
+        <h3>City General Hospital</h3>
+        <p><strong>Contact:</strong> +91 80 1234 5678</p>
+        <p><strong>Address:</strong> 123 Main Street, Bangalore, Karnataka</p>
+        <p><strong>Distance:</strong> 1.2 km away</p>
+        <p><strong>Type:</strong> Emergency Department</p>
+        <p><strong>Hours:</strong> 24/7 Emergency Services</p>
+        <a href="https://goo.gl/maps/xyz" target="_blank">Get Directions</a>
+        <p><strong>Ambulance:</strong> +91 80 9876 5432</p>
+        <button onclick="showMessage('City General Hospital')">Get More Info</button>
+    </div>
+
+    <div class="medical-center">
+        <h3>Care Plus Medical Center</h3>
+        <p><strong>Contact:</strong> +91 80 2345 6789</p>
+        <p><strong>Address:</strong> 456 Care Avenue, Bangalore, Karnataka</p>
+        <p><strong>Distance:</strong> 2.5 km away</p>
+        <p><strong>Type:</strong> Trauma Center</p>
+        <p><strong>Hours:</strong> 24/7 Emergency Services</p>
+        <a href="https://goo.gl/maps/abc" target="_blank">Get Directions</a>
+        <p><strong>Ambulance:</strong> +91 80 1122 3344</p>
+        <button onclick="showMessage('Care Plus Medical Center')">Get More Info</button>
+    </div>
+
+    <div class="medical-center">
+        <h3>LifeCare Emergency Hospital</h3>
+        <p><strong>Contact:</strong> +91 80 3456 7890</p>
+        <p><strong>Address:</strong> 789 LifeCare Road, Bangalore, Karnataka</p>
+        <p><strong>Distance:</strong> 3.0 km away</p>
+        <p><strong>Type:</strong> Emergency Room</p>
+        <p><strong>Hours:</strong> 24/7 Emergency Services</p>
+        <a href="https://goo.gl/maps/xyz" target="_blank">Get Directions</a>
+        <p><strong>Ambulance:</strong> +91 80 5432 1122</p>
+        <button onclick="showMessage('LifeCare Emergency Hospital')">Get More Info</button>
+    </div>
+
+    <div class="medical-center">
+        <h3>Hope Hospital</h3>
+        <p><strong>Contact:</strong> +91 80 5678 9012</p>
+        <p><strong>Address:</strong> 123 Hope Lane, Bangalore, Karnataka</p>
+        <p><strong>Distance:</strong> 1.8 km away</p>
+        <p><strong>Type:</strong> General Medical</p>
+        <p><strong>Hours:</strong> 24/7 Emergency Services</p>
+        <a href="https://goo.gl/maps/def" target="_blank">Get Directions</a>
+        <p><strong>Ambulance:</strong> +91 80 7654 3210</p>
+        <button onclick="showMessage('Hope Hospital')">Get More Info</button>
+    </div>
+
+    <div id="info-message" class="message"></div>
+
+    <!-- Button to toggle background color -->
+</div>
+
+<script>
+    // Function to display a message when the button is clicked
+    function showMessage(centerName) {
+        const message = document.getElementById('info-message');
+        message.textContent = `You requested more info about ${centerName}. Please contact the hospital directly or visit their website for more details.`;
+    }
+
+    // Function to toggle background color between light blue and light red
+   
+</script>
+
+</body>
+</html>

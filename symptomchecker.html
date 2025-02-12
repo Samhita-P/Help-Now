@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+        }
+
+        .question {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        header {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            padding: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        header img {
+            height: 50px;
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            color: #D32F2F;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #D32F2F;
+            margin: 0;
+        }
+
+        .option {
+            background-color: #d32f2f;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 18px;
+        }
+
+        .option:hover {
+            background-color: #FF0000;
+        }
+
+        .result {
+            display: none;
+            margin-top: 30px;
+            background-color: #d32f2f;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+
+        .error {
+            display: none;
+            margin-top: 30px;
+            background-color: #FF0000;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- Add your logo here -->
+        <img src="logo.png" alt="Logo">
+        <div>
+            <h1>HelpNow</h1>
+            <p>First Aid Help at Your Fingertips</p>
+        </div>
+    </header>
+
+<div class="container">
+    <h1>Symptom Checker</h1>
+
+    <div id="disease-selection">
+        <p class="question">Please choose a disease to check your symptoms:</p>
+        <div class="options" id="disease-list"></div>
+    </div>
+
+    <div id="question-container"></div>
+    <div id="result" class="result"></div>
+    <div id="error" class="error">Please answer all the questions to get a result.</div>
+</div>
+
+<script>
+    const diseases = {
+        covid: {
+            name: "COVID-19",
+            questions: [
+                { question: "Do you have a fever?", options: ["Yes", "No"], key: "fever" },
+                { question: "Do you have a cough?", options: ["Yes", "No"], key: "cough" },
+                { question: "Are you feeling fatigued?", options: ["Yes", "No"], key: "fatigue" },
+                { question: "Do you have difficulty breathing?", options: ["Yes", "No"], key: "shortnessOfBreath" }
+            ],
+            analyze: function(answers) {
+                let symptomsCount = 0;
+                if (answers.fever === "Yes") symptomsCount++;
+                if (answers.cough === "Yes") symptomsCount++;
+                if (answers.fatigue === "Yes") symptomsCount++;
+                if (answers.shortnessOfBreath === "Yes") symptomsCount++;
+
+                return symptomsCount >= 3 ? "You may have COVID-19. Please seek medical advice and get tested." : "You don't show significant symptoms for COVID-19.";
+            }
+        },
+        flu: {
+            name: "Flu",
+            questions: [
+                { question: "Do you have a fever?", options: ["Yes", "No"], key: "fever" },
+                { question: "Do you have a sore throat?", options: ["Yes", "No"], key: "soreThroat" },
+                { question: "Are you feeling fatigued?", options: ["Yes", "No"], key: "fatigue" },
+                { question: "Do you have a runny nose?", options: ["Yes", "No"], key: "runnyNose" }
+            ],
+            analyze: function(answers) {
+                let symptomsCount = 0;
+                if (answers.fever === "Yes") symptomsCount++;
+                if (answers.soreThroat === "Yes") symptomsCount++;
+                if (answers.fatigue === "Yes") symptomsCount++;
+                if (answers.runnyNose === "Yes") symptomsCount++;
+
+                return symptomsCount >= 3 ? "You may have the Flu. Please rest and hydrate, and seek medical advice if necessary." : "You don't show significant symptoms for the Flu.";
+            }
+        },
+        malaria: {
+            name: "Malaria",
+            questions: [
+                { question: "Do you have chills?", options: ["Yes", "No"], key: "chills" },
+                { question: "Do you have a fever?", options: ["Yes", "No"], key: "fever" },
+                { question: "Are you feeling fatigued?", options: ["Yes", "No"], key: "fatigue" },
+                { question: "Do you have sweating episodes?", options: ["Yes", "No"], key: "sweating" }
+            ],
+            analyze: function(answers) {
+                let symptomsCount = 0;
+                if (answers.chills === "Yes") symptomsCount++;
+                if (answers.fever === "Yes") symptomsCount++;
+                if (answers.fatigue === "Yes") symptomsCount++;
+                if (answers.sweating === "Yes") symptomsCount++;
+
+                return symptomsCount >= 3 ? "You may have Malaria. Please consult a doctor for a proper diagnosis and treatment." : "You don't show significant symptoms for Malaria.";
+            }
+        },
+        dengue: {
+            name: "Dengue",
+            questions: [
+                { question: "Do you have a high fever?", options: ["Yes", "No"], key: "highFever" },
+                { question: "Do you have joint pain?", options: ["Yes", "No"], key: "jointPain" },
+                { question: "Are you feeling fatigued?", options: ["Yes", "No"], key: "fatigue" },
+                { question: "Do you have nausea or vomiting?", options: ["Yes", "No"], key: "nausea" }
+            ],
+            analyze: function(answers) {
+                let symptomsCount = 0;
+                if (answers.highFever === "Yes") symptomsCount++;
+                if (answers.jointPain === "Yes") symptomsCount++;
+                if (answers.fatigue === "Yes") symptomsCount++;
+                if (answers.nausea === "Yes") symptomsCount++;
+
+                return symptomsCount >= 3 ? "You may have Dengue. Please consult a healthcare provider." : "You don't show significant symptoms for Dengue.";
+            }
+        },
+        tuberculosis: {
+            name: "Tuberculosis (TB)",
+            questions: [
+                { question: "Do you have a persistent cough?", options: ["Yes", "No"], key: "persistentCough" },
+                { question: "Are you coughing up blood?", options: ["Yes", "No"], key: "coughingBlood" },
+                { question: "Do you have weight loss?", options: ["Yes", "No"], key: "weightLoss" },
+                { question: "Do you have night sweats?", options: ["Yes", "No"], key: "nightSweats" }
+            ],
+            analyze: function(answers) {
+                let symptomsCount = 0;
+                if (answers.persistentCough === "Yes") symptomsCount++;
+                if (answers.coughingBlood === "Yes") symptomsCount++;
+                if (answers.weightLoss === "Yes") symptomsCount++;
+                if (answers.nightSweats === "Yes") symptomsCount++;
+
+                return symptomsCount >= 3 ? "You may have Tuberculosis (TB). Please consult a healthcare provider for testing and treatment." : "You don't show significant symptoms for Tuberculosis (TB).";
+            }
+        },
+        hepatitisA: {
+            name: "Hepatitis A",
+            questions: [
+                { question: "Do you have jaundice?", options: ["Yes", "No"], key: "jaundice" },
+                { question: "Do you feel fatigued?", options: ["Yes", "No"], key: "fatigue" },
+                { question: "Do you have nausea?", options: ["Yes", "No"], key: "nausea" },
+                { question: "Do you have abdominal pain?", options: ["Yes", "No"], key: "abdominalPain" }
+            ],
+            analyze: function(answers) {
+                let symptomsCount = 0;
+                if (answers.jaundice === "Yes") symptomsCount++;
+                if (answers.fatigue === "Yes") symptomsCount++;
+                if (answers.nausea === "Yes") symptomsCount++;
+                if (answers.abdominalPain === "Yes") symptomsCount++;
+
+                return symptomsCount >= 3 ? "You may have Hepatitis A. Please consult a healthcare provider for testing and treatment." : "You don't show significant symptoms for Hepatitis A.";
+            }
+        },
+        chickenpox: {
+            name: "Chickenpox",
+            questions: [
+                { question: "Do you have a rash?", options: ["Yes", "No"], key: "rash" },
+                { question: "Do you have fever?", options: ["Yes", "No"], key: "fever" },
+                { question: "Do you have itching?", options: ["Yes", "No"], key: "itching" },
+                { question: "Do you have tiredness?", options: ["Yes", "No"], key: "tiredness" }
+            ],
+            analyze: function(answers) {
+                let symptomsCount = 0;
+                if (answers.rash === "Yes") symptomsCount++;
+                if (answers.fever === "Yes") symptomsCount++;
+                if (answers.itching === "Yes") symptomsCount++;
+                if (answers.tiredness === "Yes") symptomsCount++;
+
+                return symptomsCount >= 3 ? "You may have Chickenpox. Please consult a doctor for confirmation and treatment." : "You don't show significant symptoms for Chickenpox.";
+            }
+        },
+        malaria: {
+            name: "Malaria",
+            questions: [
+                { question: "Do you have chills?", options: ["Yes", "No"], key: "chills" },
+                { question: "Do you have fever?", options: ["Yes", "No"], key: "fever" },
+                { question: "Are you feeling fatigued?", options: ["Yes", "No"], key: "fatigue" },
+                { question: "Do you have sweating episodes?", options: ["Yes", "No"], key: "sweating" }
+            ],
+            analyze: function(answers) {
+                let symptomsCount = 0;
+                if (answers.chills === "Yes") symptomsCount++;
+                if (answers.fever === "Yes") symptomsCount++;
+                if (answers.fatigue === "Yes") symptomsCount++;
+                if (answers.sweating === "Yes") symptomsCount++;
+
+                return symptomsCount >= 3 ? "You may have Malaria. Please consult a doctor for a proper diagnosis and treatment." : "You don't show significant symptoms for Malaria.";
+            }
+        },
+        typhoid: {
+            name: "Typhoid",
+            questions: [
+                { question: "Do you have a fever?", options: ["Yes", "No"], key: "fever" },
+                { question: "Do you have abdominal pain?", options: ["Yes", "No"], key: "abdominalPain" },
+                { question: "Do you feel weak or fatigued?", options: ["Yes", "No"], key: "weakness" },
+                { question: "Do you have nausea or vomiting?", options: ["Yes", "No"], key: "nausea" }
+            ],
+            analyze: function(answers) {
+                let symptomsCount = 0;
+                if (answers.fever === "Yes") symptomsCount++;
+                if (answers.abdominalPain === "Yes") symptomsCount++;
+                if (answers.weakness === "Yes") symptomsCount++;
+                if (answers.nausea === "Yes") symptomsCount++;
+
+                return symptomsCount >= 3 ? "You may have Typhoid. Please consult a healthcare provider for testing." : "You don't show significant symptoms for Typhoid.";
+            }
+        }
+    };
+
+    let selectedDisease;
+    let userAnswers = {};
+
+    function showDiseases() {
+        const diseaseList = document.getElementById('disease-list');
+        diseaseList.innerHTML = '';
+
+        Object.keys(diseases).forEach(diseaseKey => {
+            const disease = diseases[diseaseKey];
+            const diseaseOption = document.createElement('div');
+            diseaseOption.textContent = disease.name;
+            diseaseOption.classList.add('option');
+            diseaseOption.onclick = () => selectDisease(disease);
+            diseaseList.appendChild(diseaseOption);
+        });
+    }
+
+    function selectDisease(disease) {
+        selectedDisease = disease;
+        userAnswers = {};
+        document.getElementById('disease-selection').style.display = 'none';
+        showQuestion(0);
+    }
+
+    function showQuestion(questionIndex) {
+        const questionContainer = document.getElementById('question-container');
+        if (questionIndex < selectedDisease.questions.length) {
+            const question = selectedDisease.questions[questionIndex];
+            questionContainer.innerHTML = `
+                <p class="question">${question.question}</p>
+                <div class="options">
+                    ${question.options.map(option => `
+                        <div class="option" onclick="saveAnswer('${question.key}', '${option}', ${questionIndex + 1})">${option}</div>
+                    `).join('')}
+                </div>
+            `;
+        } else {
+            showResult();
+        }
+    }
+
+    function saveAnswer(key, value, nextQuestionIndex) {
+        userAnswers[key] = value;
+        showQuestion(nextQuestionIndex);
+    }
+
+    function showResult() {
+        const resultContainer = document.getElementById('result');
+        const errorContainer = document.getElementById('error');
+
+        if (Object.keys(userAnswers).length === selectedDisease.questions.length) {
+            errorContainer.style.display = 'none';
+            resultContainer.style.display = 'block';
+            resultContainer.innerHTML = selectedDisease.analyze(userAnswers);
+        } else {
+            resultContainer.style.display = 'none';
+            errorContainer.style.display = 'block';
+        }
+    }
+
+    window.onload = showDiseases;
+</script>
+
+</body>
+</html>

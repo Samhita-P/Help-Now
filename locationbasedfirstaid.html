@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location-Based First Aid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            padding: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        header img {
+            height: 50px;
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            color: #D32F2F;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #D32F2F;
+            margin: 0;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .button:hover {
+            background-color: #b71c1c;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            font-size: 14px;
+        }
+
+        .location-info {
+            font-size: 18px;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            font-size: 16px;
+            color: #333;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <!-- Add your logo here -->
+    <img src="logo.png" alt="Logo">
+    <div>
+        <h1>HelpNow</h1>
+        <p>First Aid Help at Your Fingertips</p>
+    </div>
+</header>
+
+<div class="container">
+    <h2>Location-Based First Aid</h2>
+
+    <div class="section">
+        <button class="button" onclick="getLocation()">Get My Location</button>
+        <p id="locationMessage">Click the button to find your location and get relevant first aid information.</p>
+    </div>
+
+    <div class="section" id="nearbyServices">
+        <h3>Nearby Medical Services</h3>
+        <p>We display nearby hospitals, clinics, pharmacies, and medical centers based on your current location. This helps you find immediate medical help in case of an emergency. Example: If you’re in a metropolitan area, the nearest major hospitals and 24/7 pharmacies will be listed with contact numbers and addresses.</p>
+        <ul>
+            <li>Hospital 1 - 1.2 km away, 24/7 emergency care</li>
+            <li>Clinic 1 - 2.3 km away, General Medicine</li>
+            <li>Pharmacy 1 - 0.5 km away, Open 24/7</li>
+            <li>Specialist Clinic - 3.1 km away, Cardiology</li>
+        </ul>
+    </div>
+
+    <div class="section" id="emergencyNumbers">
+        <h3>Emergency Numbers</h3>
+        <p>We provide emergency contact details based on your location. In case of urgent medical assistance, contacting the right emergency service is crucial. Below are common emergency numbers for India:</p>
+        <ul>
+            <li>Ambulance: 112 (Pan India)</li>
+            <li>Fire Services: 101 (Pan India)</li>
+            <li>Police: 100 (Pan India)</li>
+            <li>Disaster Management: 108 (For natural disasters and other emergencies)</li>
+            <li>Women's Helpline: 181 (For safety and support)</li>
+        </ul>
+    </div>
+
+    <div class="section" id="localizedFirstAid">
+    <h3>Localized First Aid</h3>
+    <p>First aid procedures can vary greatly depending on the location and environment. Below are 20 scenarios you might encounter and how to deal with them in your particular surroundings:</p>
+
+    <ul>
+        <li><strong>Heatstroke (Tropical Regions):</strong>
+            <p>If you experience heatstroke symptoms, such as confusion, nausea, or a rapid pulse, immediately move to a cool area, lie down, and elevate your feet. Use cool water or ice packs on the neck, armpits, and groin. Seek medical help immediately, especially if the person becomes unresponsive.</p>
+        </li>
+
+        <li><strong>Frostbite (Cold Regions):</strong>
+            <p>In extremely cold environments, frostbite can affect exposed skin. Rewarm the affected area slowly by soaking it in warm (not hot) water. Avoid rubbing frostbitten areas and remove any tight clothing. Seek medical attention for severe cases to prevent permanent tissue damage.</p>
+        </li>
+
+        <li><strong>Snake Bites (Rural or Forested Areas):</strong>
+            <p>If bitten by a snake, keep the victim still to slow the spread of venom. Do not try to suck out the venom or apply ice. Keep the bite site below heart level. Get medical help immediately, especially if the snake is venomous. Identify the snake, if safe to do so, to aid treatment.</p>
+        </li>
+
+        <li><strong>Insect Stings (Forest or Gardens):</strong>
+            <p>For minor stings, remove the stinger by scraping with a flat edge. Apply ice or a cold compress to reduce swelling. For severe allergic reactions, use an epinephrine injector (if available) and seek medical assistance immediately.</p>
+        </li>
+
+        <li><strong>Dehydration (Hot and Dry Climates):</strong>
+            <p>If someone shows signs of dehydration (dry mouth, dark urine, dizziness), encourage them to drink fluids like water and electrolyte drinks. Avoid caffeine or alcohol. For severe dehydration, seek medical care as IV fluids may be required.</p>
+        </li>
+
+        <li><strong>Burns (Any Environment):</strong>
+            <p>For minor burns, run cool water over the burned area for 10-15 minutes. For more severe burns, avoid removing clothing that is stuck to the skin. Cover with a clean, non-stick bandage and seek medical help if necessary.</p>
+        </li>
+
+        <li><strong>Allergic Reactions (Anywhere):</strong>
+            <p>In case of an allergic reaction, monitor for signs like swelling, hives, or difficulty breathing. Administer an epinephrine shot if available and seek immediate medical help, especially if the symptoms escalate rapidly.</p>
+        </li>
+
+        <li><strong>Diabetic Emergencies (Urban Areas):</strong>
+            <p>If someone experiences symptoms of hypoglycemia (shaking, confusion), offer them something sugary to drink or eat. If symptoms do not improve, seek medical help immediately.</p>
+        </li>
+
+        <li><strong>Eye Injuries (Any Environment):</strong>
+            <p>For foreign object injuries to the eye, avoid rubbing the eye. Rinse with clean water or saline. In case of chemical burns, flush the eye immediately with water and seek professional help.</p>
+        </li>
+
+        <li><strong>Stroke (Any Location):</strong>
+            <p>If you suspect a stroke (numbness, difficulty speaking, or walking), call for emergency help immediately. Do not try to give fluids. Keep the person calm and monitor their condition while waiting for medical help.</p>
+        </li>
+
+        <li><strong>Poisoning (Urban and Rural Areas):</strong>
+            <p>If someone ingests a toxic substance, do not induce vomiting unless instructed. Call the local poison control center and provide as much information as possible. Keep the victim calm and wait for further instructions.</p>
+        </li>
+
+        <li><strong>Heat Exhaustion (Tropical or Hot Areas):</strong>
+            <p>In hot climates, heat exhaustion can occur due to dehydration and overexposure to heat. Move the affected person to a cooler place, rehydrate with cool water, and remove tight clothing. Monitor for signs of heatstroke, and if necessary, seek medical help.</p>
+        </li>
+
+        <li><strong>Hypothermia (Cold and Wet Environments):</strong>
+            <p>When hypothermia occurs (shivering, slurred speech), move the person to a warm environment and gradually warm them up with blankets and warm drinks. Do not use direct heat like hot water or heating pads. Seek medical attention for moderate to severe hypothermia.</p>
+        </li>
+
+        <li><strong>Bleeding (Any Environment):</strong>
+            <p>If someone is bleeding heavily, apply direct pressure to the wound with a clean cloth. If bleeding does not stop, elevate the injury above heart level and apply more pressure. If the bleeding is severe, seek immediate medical assistance.</p>
+        </li>
+
+        <li><strong>Fractures (Any Environment):</strong>
+            <p>For a suspected fracture, immobilize the affected limb using a splint or something sturdy. Keep the person still and avoid unnecessary movement. Seek professional medical help, as fractures often require proper care and sometimes surgery.</p>
+        </li>
+
+        <li><strong>Severe Allergic Reactions (Anywhere):</strong>
+            <p>For severe allergic reactions (anaphylaxis), administer an epinephrine injection if available. Call emergency services immediately as the reaction can cause difficulty breathing, swelling, or even death if untreated.</p>
+        </li>
+
+        <li><strong>Choking (Any Environment):</strong>
+            <p>If a person is choking, encourage them to cough to try and dislodge the object. If they cannot cough or speak, perform the Heimlich maneuver (abdominal thrusts) to expel the obstruction. If unsuccessful, seek immediate medical help.</p>
+        </li>
+
+        <li><strong>Sepsis (Any Environment):</strong>
+            <p>Sepsis can occur if an infection goes untreated. Signs include fever, rapid heart rate, and confusion. Immediate medical intervention is critical for sepsis, as it can lead to organ failure and death. Seek help as soon as sepsis is suspected.</p>
+        </li>
+
+        <li><strong>Anxiety Attacks (Urban Areas):</strong>
+            <p>During an anxiety attack, help the person breathe slowly, encourage them to focus on something calming, and ensure they are in a safe space. If symptoms persist, encourage them to seek medical or psychological assistance.</p>
+        </li>
+
+        <li><strong>Heavy Menstrual Bleeding (Any Environment):</strong>
+            <p>In cases of heavy menstrual bleeding, use sanitary pads and rest. If the bleeding persists and is severe, seek medical help, especially if dizziness or fainting occurs. In certain cases, medication may be needed to stop the bleeding.</p>
+        </li>
+    </ul>
+
+    <p><em>Always ensure the person receives proper medical care if the situation worsens or does not improve. First aid is only a temporary solution, and professional help is often necessary for full recovery.</em></p>
+</div>
+
+
+    <div class="section" id="weatherFirstAid">
+    <h3>Weather-Related First Aid</h3>
+    <p>Weather conditions can cause a variety of health issues, ranging from heat-related illnesses to cold-induced injuries. Below are 20 common weather-related first aid situations and how to address them:</p>
+
+    <ul>
+        <li><strong>Heat Exhaustion (Hot Weather):</strong>
+            <p>Symptoms include heavy sweating, weakness, dizziness, nausea, and headaches. Move the person to a cooler place, provide fluids, and apply cool compresses. Encourage rest. If symptoms worsen, seek medical attention.</p>
+        </li>
+
+        <li><strong>Heat Stroke (Hot Weather):</strong>
+            <p>Heat stroke is a life-threatening condition. Symptoms include confusion, seizures, and unconsciousness. Call for emergency help immediately, move the person to a cooler area, and apply ice packs to the body.</p>
+        </li>
+
+        <li><strong>Sunburn (Hot Weather):</strong>
+            <p>Apply cool water to the affected area, use aloe vera gel or sunburn relief lotion. Stay hydrated and avoid direct sunlight. If blisters develop, seek medical care to prevent infection.</p>
+        </li>
+
+        <li><strong>Dehydration (Hot and Dry Climates):</strong>
+            <p>Signs of dehydration include dry mouth, fatigue, and dark urine. Encourage the individual to drink water or electrolyte drinks. For severe dehydration, seek medical help, as IV fluids may be necessary.</p>
+        </li>
+
+        <li><strong>Heat Rash (Hot Weather):</strong>
+            <p>Heat rash occurs due to sweat trapped in sweat ducts. Move the person to a cooler environment, remove any tight clothing, and apply cool compresses. Avoid scratching the rash to prevent infection.</p>
+        </li>
+
+        <li><strong>Hypothermia (Cold Weather):</strong>
+            <p>Hypothermia occurs when the body temperature drops below 95°F (35°C). Symptoms include shivering, confusion, and drowsiness. Move the person to a warm environment, remove wet clothing, and gradually warm them up. Avoid using direct heat and seek medical attention.</p>
+        </li>
+
+        <li><strong>Frostbite (Cold Weather):</strong>
+            <p>Frostbite affects extremities like fingers, toes, and ears. Gently warm the affected areas with lukewarm water. Avoid direct heat, and never rub the affected skin. Seek medical help for severe cases.</p>
+        </li>
+
+        <li><strong>Windburn (Cold and Windy Weather):</strong>
+            <p>Windburn occurs when cold, dry winds cause skin irritation. Apply a gentle moisturizer to the affected skin and avoid exposure to harsh winds. Use a scarf or face mask to protect skin in the future.</p>
+        </li>
+
+        <li><strong>Snow Blindness (Snowy Weather):</strong>
+            <p>Snow blindness is caused by UV radiation reflecting off snow. If you experience symptoms like pain, blurred vision, or redness, move to a shaded area and use sunglasses or goggles. Apply cold compresses and seek medical attention if symptoms persist.</p>
+        </li>
+
+        <li><strong>Shivering (Cold Weather):</strong>
+            <p>Shivering is the body's natural response to cold temperatures. Help the person warm up gradually by covering them with blankets and providing warm drinks. If shivering persists and they show signs of hypothermia, seek medical help.</p>
+        </li>
+
+        <li><strong>Cold Water Shock (Cold Water Exposure):</strong>
+            <p>When exposed to cold water, the body can experience a rapid shock. If someone falls into cold water, call for help immediately, and keep them as still as possible. Help them get out of the water and warm them up slowly. Seek medical attention if needed.</p>
+        </li>
+
+        <li><strong>Thunderstorm Injury (Stormy Weather):</strong>
+            <p>During thunderstorms, avoid using electrical appliances and seek shelter. If someone is struck by lightning, perform CPR and seek emergency help immediately. Lightning strikes can cause burns, cardiac arrest, or neurological damage.</p>
+        </li>
+
+        <li><strong>Flood Injury (Flooding or Heavy Rain):</strong>
+            <p>If caught in a flood, move to higher ground and avoid contact with floodwaters, which may be contaminated. If injured, clean the wound with clean water and apply a sterile bandage. Seek medical help if needed.</p>
+        </li>
+
+        <li><strong>Hail Injury (Hailstorms):</strong>
+            <p>During hailstorms, seek shelter immediately. If injured by hail, apply ice to bruises and cuts to reduce swelling. For head injuries, apply pressure to stop bleeding and seek medical attention.</p>
+        </li>
+
+        <li><strong>Lightning Strike (Stormy Weather):</strong>
+            <p>If someone is struck by lightning, call emergency services immediately. Perform CPR if necessary and treat burns with cool, running water. Do not touch the victim if they are still in contact with a live power source.</p>
+        </li>
+
+        <li><strong>Wind Chill (Cold Weather with High Winds):</strong>
+            <p>Wind chill can cause frostbite and hypothermia more quickly. Shelter from the wind, cover exposed skin, and wear multiple layers of clothing. Seek shelter indoors as soon as possible if the wind chill becomes dangerous.</p>
+        </li>
+
+        <li><strong>Dust Storm Injury (Dry and Windy Climates):</strong>
+            <p>If exposed to a dust storm, cover your mouth with a cloth, wear protective goggles, and avoid inhaling the dust. Drink plenty of water to avoid dehydration. If symptoms like coughing or shortness of breath persist, seek medical help.</p>
+        </li>
+
+        <li><strong>Rainwater Contamination (Rainy Season):</strong>
+            <p>Rainwater can sometimes carry pathogens. Avoid drinking unfiltered rainwater, especially in areas with poor sanitation. If exposed to contaminated water, watch for symptoms of gastrointestinal distress and seek medical attention if necessary.</p>
+        </li>
+
+        <li><strong>Slippery Roads and Falls (Rain, Snow, or Ice):</strong>
+            <p>After rain or snow, the ground may become slippery, increasing the risk of falls. In case of injury, immobilize the affected area and seek medical help. For cuts or abrasions, clean and bandage the wound.</p>
+        </li>
+
+        <li><strong>Altitude Sickness (High-Altitude Areas):</strong>
+            <p>Altitude sickness can occur in areas above 8,000 feet. Symptoms include headache, nausea, and dizziness. Gradually ascend to avoid altitude sickness and drink plenty of water. If symptoms persist, descend to lower altitudes and seek medical help.</p>
+        </li>
+    </ul>
+
+    <p><em>Each weather condition poses its unique set of challenges, and understanding how to respond to these conditions can save lives. Always remember that first aid is a temporary solution, and in severe cases, professional medical help should be sought immediately.</em></p>
+</div>
+
+
+    <div class="section" id="ambulanceServices">
+        <h3>Nearby Ambulance Services</h3>
+        <p>Ambulance services are critical in case of an emergency. Based on your location, we provide a list of nearby ambulance services:</p>
+        <ul>
+            <li>Ambulance Service 1 - 1.5 km away, 24/7 service, call 911 for immediate assistance.</li>
+            <li>Ambulance Service 2 - 3 km away, non-emergency transport services.</li>
+            <li>Ambulance Service 3 - 5 km away, available for medical transfers.</li>
+        </ul>
+    </div>
+
+    <div class="section" id="searchFilter">
+        <h3>Search & Filter Emergency Services</h3>
+        <p>We allow you to search and filter emergency medical services by type (hospital, clinic, ambulance, pharmacy), distance, and ratings. This makes it easier for you to find the best available medical assistance in your area:</p>
+        <ul>
+            <li>Filter by <strong>hospital type</strong> (e.g., general, specialized, pediatric).</li>
+            <li>Sort results based on <strong>distance</strong> or <strong>ratings</strong>.</li>
+            <li>Search for <strong>nearest pharmacies</strong> that are open 24/7 for quick access to medications.</li>
+        </ul>
+    </div>
+
+    <div class="section" id="emergencyAlerts">
+        <h3>Emergency Alerts & Notifications</h3>
+        <p>Receive real-time emergency alerts such as natural disasters, weather warnings, or local accidents. Stay informed and be prepared for any emergencies:</p>
+        <ul>
+            <li>Receive alerts on <strong>earthquakes</strong>, <strong>floods</strong>, and <strong>storms</strong> in your region.</li>
+            <li>Notifications on <strong>road accidents</strong> or major health risks in your vicinity.</li>
+            <li>Get warnings on <strong>pandemics</strong> and health-related emergencies in your area.</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 HelpNow. All Rights Reserved.</p>
+    </div>
+</div>
+
+<script>
+    let userLocation = null;
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            document.getElementById("locationMessage").innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        userLocation = position.coords;
+        document.getElementById("locationMessage").innerHTML = "Your location: " + userLocation.latitude + ", " + userLocation.longitude;
+    }
+
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                document.getElementById("locationMessage").innerHTML = "User denied the request for Geolocation.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                document.getElementById("locationMessage").innerHTML = "Location information is unavailable.";
+                break;
+            case error.TIMEOUT:
+                document.getElementById("locationMessage").innerHTML = "The request to get user location timed out.";
+                break;
+            case error.UNKNOWN_ERROR:
+                document.getElementById("locationMessage").innerHTML = "An unknown error occurred.";
+                break;
+        }
+    }
+</script>
+
+</body>
+</html>

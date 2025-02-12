@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Aid Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    header {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            padding: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        header img {
+            height: 50px;
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            color: #D32F2F;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #D32F2F;
+            margin: 0;
+        }
+
+    .chat-container {
+      max-width: 800px;
+      margin: auto;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    .chat-box {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+    .message {
+      padding: 10px;
+      border-radius: 5px;
+      margin: 5px 0;
+    }
+    .bot-message {
+      background-color: #f1f1f1;
+    }
+    .user-message {
+      background-color: #d1f7c4;
+      text-align: right;
+    }
+    .user-input {
+      display: flex;
+      justify-content: space-between;
+    }
+    .user-input input {
+      width: 80%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .user-input button {
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+    .user-input button:hover {
+      background-color: #45a049;
+    }
+    .options {
+      margin-top: 15px;
+    }
+    .options button {
+      padding: 10px;
+      margin: 5px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .options button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+        <!-- Add your logo here -->
+        <img src="logo.png" alt="Logo">
+        <div>
+            <h1>HelpNow</h1>
+            <p>First Aid Help at Your Fingertips</p>
+        </div>
+    </header>
+
+  <div class="chat-container">
+    <div class="chat-box" id="chatBox"></div>
+
+    <div class="user-input">
+      <input type="text" id="userInput" placeholder="Type your message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById('chatBox');
+    const userInput = document.getElementById('userInput');
+
+    let userSymptoms = [];
+    let currentCondition = '';
+
+    const chatbot = {
+      welcomeMessage: "Hello! I am here to help you with first aid. Please tell me the type of emergency (e.g., Heart Attack, Stroke, Fever, etc.):",
+      responses: {
+        "heart attack": {
+          question: "Are you experiencing chest pain?",
+          options: ["Yes", "No"],
+          action: function(answer) {
+            if (answer === "Yes") {
+              return "It seems like you might be experiencing a heart attack. Immediate medical attention is required!";
+            } else {
+              return "It might not be a heart attack. But please monitor your symptoms and seek medical advice if it worsens.";
+            }
+          }
+        },
+        "stroke": {
+          question: "Is the person experiencing numbness, difficulty speaking, or confusion?",
+          options: ["Yes", "No"],
+          action: function(answer) {
+            if (answer === "Yes") {
+              return "It could be a stroke. Call emergency services immediately!";
+            } else {
+              return "It might not be a stroke, but if symptoms worsen, seek medical advice.";
+            }
+          }
+        },
+        "fever": {
+          question: "Are you experiencing chills or sweating?",
+          options: ["Yes", "No"],
+          action: function(answer) {
+            if (answer === "Yes") {
+              return "It seems like you might have a fever. Rest, drink fluids, and monitor your temperature.";
+            } else {
+              return "If symptoms persist, contact a healthcare professional.";
+            }
+          }
+        },
+        "severe bleeding": {
+          question: "Is the bleeding severe? (gushing or continuous)",
+          options: ["Yes", "No"],
+          action: function(answer) {
+            if (answer === "Yes") {
+              return "Apply pressure with a clean cloth or bandage to stop the bleeding and call emergency services!";
+            } else {
+              return "For minor bleeding, apply pressure to the wound and elevate it.";
+            }
+          }
+        },
+        "burns": {
+          question: "Is the area red, swollen, or blistered?",
+          options: ["Yes", "No"],
+          action: function(answer) {
+            if (answer === "Yes") {
+              return "For burns, immediately run cool water over the burn and seek medical help if the burn is severe.";
+            } else {
+              return "For minor burns, apply aloe vera or a cool compress.";
+            }
+          }
+        },
+        // Add more conditions as needed
+      }
+    };
+
+    function sendMessage() {
+      const userMessage = userInput.value.trim();
+      if (userMessage) {
+        displayMessage(userMessage, 'user');
+        processUserInput(userMessage);
+      }
+      userInput.value = '';
+    }
+
+    function displayMessage(message, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', `${sender}-message`);
+      messageDiv.textContent = message;
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function processUserInput(input) {
+      input = input.toLowerCase();
+
+      // Start with condition selection
+      if (!currentCondition) {
+        if (Object.keys(chatbot.responses).some(condition => input.includes(condition))) {
+          // Match condition
+          currentCondition = Object.keys(chatbot.responses).find(condition => input.includes(condition));
+          displayMessage(chatbot.responses[currentCondition].question, 'bot');
+          createOptions(chatbot.responses[currentCondition].options);
+        } else {
+          displayMessage("Please tell me the type of emergency (e.g., Heart Attack, Stroke, Fever).", 'bot');
+        }
+      } else {
+        // Handle follow-up questions based on the selected condition
+        const response = chatbot.responses[currentCondition].action(input);
+        displayMessage(response, 'bot');
+        currentCondition = ''; // Reset condition after response
+      }
+    }
+
+    function createOptions(options) {
+      const optionsDiv = document.createElement('div');
+      optionsDiv.classList.add('options');
+      options.forEach(option => {
+        const button = document.createElement('button');
+        button.textContent = option;
+        button.onclick = () => processUserInput(option);
+        optionsDiv.appendChild(button);
+      });
+      chatBox.appendChild(optionsDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function init() {
+      displayMessage(chatbot.welcomeMessage, 'bot');
+    }
+
+    init();
+  </script>
+
+</body>
+</html>

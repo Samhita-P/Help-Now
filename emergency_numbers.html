@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Numbers by Region</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 20px;
+        }
+        label {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        select {
+            font-size: 16px;
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+        .emergency-info {
+            padding: 15px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            display: none;
+        }
+        .emergency-info h3 {
+            margin-top: 0;
+        }
+        .emergency-info ul {
+            list-style: none;
+            padding: 0;
+        }
+        .emergency-info li {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Emergency Numbers by Region</h1>
+        <label for="regionSelect">Select Region:</label>
+        <select id="regionSelect" onchange="showEmergencyNumbers()">
+            <option value="">Select a Region</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Pune">Pune</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Lucknow">Lucknow</option>
+            <option value="Jaipur">Jaipur</option>
+        </select>
+
+        <div class="emergency-info" id="emergencyInfo">
+            <h3>Emergency Numbers:</h3>
+            <ul id="emergencyList"></ul>
+        </div>
+    </div>
+
+    <script>
+        const emergencyNumbers = {
+            Bangalore: {
+                "Police": "100",
+                "Ambulance": "108",
+                "Fire Department": "101",
+                "Emergency Services": "112"
+            },
+            Hyderabad: {
+                "Police": "100",
+                "Ambulance": "108",
+                "Fire Department": "101",
+                "Emergency Services": "112"
+            },
+            Chennai: {
+                "Police": "100",
+                "Ambulance": "108",
+                "Fire Department": "101",
+                "Emergency Services": "112"
+            },
+            Mumbai: {
+                "Police": "100",
+                "Ambulance": "108",
+                "Fire Department": "101",
+                "Emergency Services": "112"
+            },
+            Delhi: {
+                "Police": "100",
+                "Ambulance": "102",
+                "Fire Department": "101",
+                "Emergency Services": "112"
+            },
+            Kolkata: {
+                "Police": "100",
+                "Ambulance": "102",
+                "Fire Department": "101",
+                "Emergency Services": "112"
+            },
+            Pune: {
+                "Police": "100",
+                "Ambulance": "108",
+                "Fire Department": "101",
+                "Emergency Services": "112"
+            },
+            Ahmedabad: {
+                "Police": "100",
+                "Ambulance": "108",
+                "Fire Department": "101",
+                "Emergency Services": "112"
+            },
+            Lucknow: {
+                "Police": "100",
+                "Ambulance": "102",
+                "Fire Department": "101",
+                "Emergency Services": "112"
+            },
+            Jaipur: {
+                "Police": "100",
+                "Ambulance": "108",
+                "Fire Department": "101",
+                "Emergency Services": "112"
+            }
+        };
+
+        function showEmergencyNumbers() {
+            const region = document.getElementById('regionSelect').value;
+            const emergencyInfo = document.getElementById('emergencyInfo');
+            const emergencyList = document.getElementById('emergencyList');
+
+            // Clear the current list
+            emergencyList.innerHTML = '';
+
+            // If region is selected, display emergency numbers
+            if (region) {
+                const numbers = emergencyNumbers[region];
+                for (let service in numbers) {
+                    const li = document.createElement('li');
+                    li.textContent = `${service}: ${numbers[service]}`;
+                    emergencyList.appendChild(li);
+                }
+                emergencyInfo.style.display = 'block'; // Show the emergency info
+            } else {
+                emergencyInfo.style.display = 'none'; // Hide the emergency info if no region is selected
+            }
+        }
+    </script>
+
+</body>
+</html>

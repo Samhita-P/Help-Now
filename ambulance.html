@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Based Ambulance Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            padding: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        header img {
+            height: 50px;
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            color: #D32F2F;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #D32F2F;
+            margin: 0;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+        }
+        select {
+            font-size: 16px;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .service-list {
+            display: none;
+            margin: 20px auto;
+            max-width: 900px;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+        }
+        .service {
+            background-color: #ffcccc;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .service h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .service p {
+            margin: 5px 0;
+        }
+        .service button {
+            padding: 10px;
+            background-color: #ff3b3b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .service button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with Logo and Tagline -->
+    <div class="header">
+        <div id="logo">HelpNow</div>
+        <div id="tagline">First Aid Help at Your Fingertips</div>
+    </div>
+
+    <!-- Region Selection -->
+    <div style="text-align:center; margin-top:30px;">
+        <label for="city-select">Select Your Region:</label>
+        <select id="city-select" onchange="showAmbulanceServices()">
+            <option value="">--Select City--</option>
+            <option value="adoni">Adoni</option>
+<option value="alappuzha">Alappuzha</option>
+<option value="angamaly">Angamaly</option>
+<option value="bengaluru">Bengaluru</option>
+<option value="chennai">Chennai</option>
+<option value="coimbatore">Coimbatore</option>
+<option value="dindigul">Dindigul</option>
+<option value="erode">Erode</option>
+<option value="hubli">Hubli</option>
+<option value="hyderabad">Hyderabad</option>
+<option value="institute">Institute</option>
+<option value="kakinada">Kakinada</option>
+<option value="kannur">Kannur</option>
+<option value="kadapa">Kadapa</option>
+<option value="kottayam">Kottayam</option>
+<option value="kochi">Kochi</option>
+<option value="kolhapur">Kolhapur</option>
+<option value="kurnool">Kurnool</option>
+<option value="krishnagiri">Krishnagiri</option>
+<option value="manjeri">Manjeri</option>
+<option value="madurai">Madurai</option>
+<option value="mangalore">Mangalore</option>
+<option value="madurai">Madurai</option>
+<option value="nellore">Nellore</option>
+<option value="nizamabad">Nizamabad</option>
+<option value="palakkad">Palakkad</option>
+<option value="puducherry">Puducherry</option>
+<option value="pondicherry">Pondicherry</option>
+<option value="raichur">Raichur</option>
+<option value="ranipet">Ranipet</option>
+<option value="salem">Salem</option>
+<option value="sivakasi">Sivakasi</option>
+<option value="tanjore">Tanjore</option>
+<option value="tiruvannamalai">Tiruvannamalai</option>
+<option value="tirunelveli">Tirunelveli</option>
+<option value="tirupur">Tirupur</option>
+<option value="trichy">Trichy</option>
+<option value="vijayawada">Vijayawada</option>
+<option value="vizag">Vizag</option>
+<option value="warangal">Warangal</option>
+<option value="tamilnadu">Tamil Nadu</option>
+<option value="karnataka">Karnataka</option>
+<option value="andhrapradesh">Andhra Pradesh</option>
+<option value="kerala">Kerala</option>
+<option value="telangana">Telangana</option>
+<option value="kolar">Kolar</option>
+<option value="palani">Palani</option>
+<option value="tindivanam">Tindivanam</option>
+<option value="chittoor">Chittoor</option>
+<option value="vijayanagaram">Vijayanagaram</option>
+<option value="rayachoti">Rayachoti</option>
+
+        </select>
+    </div>
+
+    <!-- Ambulance Services List -->
+    <div id="ambulance-services" class="service-list">
+        <h2>Top 10 Ambulance Services</h2>
+        <div id="services-container"></div>
+    </div>
+
+    <script>
+        // Static data for each city - you can later replace this with real API data
+        const ambulanceData = {
+    adoni: [
+        { hospital: "Sri Sai Ram Hospital", phone: "08512-123456" },
+        { hospital: "Adoni Government Hospital", phone: "08512-234567" },
+        { hospital: "Sai Krishna Hospital", phone: "08512-345678" },
+        { hospital: "Sree Lakshmi Hospital", phone: "08512-456789" },
+        { hospital: "Veerendra Multi-specialty Hospital", phone: "08512-567890" },
+        { hospital: "Raghavendra Hospital", phone: "08512-678901" },
+        { hospital: "Sri Venkateswara Hospital", phone: "08512-789012" },
+        { hospital: "KIMS Hospital", phone: "08512-890123" },
+        { hospital: "New Life Hospital", phone: "08512-901234" },
+        { hospital: "Shree Devi Hospital", phone: "08512-012345" }
+    ],
+    alappuzha: [
+        { hospital: "Alappuzha Medical College", phone: "0477-123456" },
+        { hospital: "KVM Hospital", phone: "0477-234567" },
+        { hospital: "Sree Gokulam Medical College", phone: "0477-345678" },
+        { hospital: "Medi Center", phone: "0477-456789" },
+        { hospital: "Rishi Hospital", phone: "0477-567890" },
+        { hospital: "Santhwana Hospital", phone: "0477-678901" },
+        { hospital: "Care Hospital", phone: "0477-789012" },
+        { hospital: "Alappuzha General Hospital", phone: "0477-890123" },
+        { hospital: "Sree Krishna Hospital", phone: "0477-901234" },
+        { hospital: "Vishnu Hospital", phone: "0477-012345" }
+    ],
+    angamaly: [
+        { hospital: "St. Thomas Hospital", phone: "0484-123456" },
+        { hospital: "Angamaly Medical Center", phone: "0484-234567" },
+        { hospital: "Holy Cross Hospital", phone: "0484-345678" },
+        { hospital: "Benedict Hospital", phone: "0484-456789" },
+        { hospital: "Vikas Hospital", phone: "0484-567890" },
+        { hospital: "Care First Hospital", phone: "0484-678901" },
+        { hospital: "Mother's Care Hospital", phone: "0484-789012" },
+        { hospital: "Royal Hospital", phone: "0484-890123" },
+        { hospital: "Vaidyaram Hospital", phone: "0484-901234" },
+        { hospital: "Chilanka Hospital", phone: "0484-012345" }
+    ],
+    bengaluru: [
+        { hospital: "St. John's Hospital", phone: "080-12345678" },
+        { hospital: "Bangalore Medical College", phone: "080-23456789" },
+        { hospital: "Manipal Hospital", phone: "080-34567890" },
+        { hospital: "Fortis Hospital", phone: "080-45678901" },
+        { hospital: "Narayana Health", phone: "080-56789012" },
+        { hospital: "Sakra Premium Hospital", phone: "080-67890123" },
+        { hospital: "Cloudnine Hospital", phone: "080-78901234" },
+        { hospital: "Koshys Hospital", phone: "080-89012345" },
+        { hospital: "Rajarajeshwari Medical College", phone: "080-90123456" },
+        { hospital: "Vydehi Hospital", phone: "080-01234567" }
+    ],
+    chennai: [
+        { hospital: "Apollo Hospitals", phone: "044-12345678" },
+        { hospital: "Fortis Malar Hospital", phone: "044-23456789" },
+        { hospital: "MIOT International Hospital", phone: "044-34567890" },
+        { hospital: "Kavery Hospital", phone: "044-45678901" },
+        { hospital: "Government General Hospital", phone: "044-56789012" },
+        { hospital: "Gleneagles Global Health City", phone: "044-67890123" },
+        { hospital: "St. Isabel's Hospital", phone: "044-78901234" },
+        { hospital: "Sree Balaji Medical College", phone: "044-89012345" },
+        { hospital: "Vijaya Hospital", phone: "044-90123456" },
+        { hospital: "SIMS Hospital", phone: "044-01234567" }
+    ],
+    coimbatore: [
+        { hospital: "Kovai Medical Center", phone: "0422-12345678" },
+        { hospital: "GKNM Hospital", phone: "0422-23456789" },
+        { hospital: "PSG Hospital", phone: "0422-34567890" },
+        { hospital: "Sri Ramakrishna Hospital", phone: "0422-45678901" },
+        { hospital: "C.S.I. Rainy Memorial", phone: "0422-56789012" },
+        { hospital: "Dr. NGP Hospital", phone: "0422-67890123" },
+        { hospital: "Sree Abirami Hospital", phone: "0422-78901234" },
+        { hospital: "R.V.S. Medical College", phone: "0422-89012345" },
+        { hospital: "K.G. Hospital", phone: "0422-90123456" },
+        { hospital: "Cochin Cancer Research Centre", phone: "0422-01234567" }
+    ],
+    dindigul: [
+        { hospital: "Sri Saran Hospital", phone: "0451-123456" },
+        { hospital: "Dindigul Government Hospital", phone: "0451-234567" },
+        { hospital: "Vishal Hospital", phone: "0451-345678" },
+        { hospital: "Ramesh Hospital", phone: "0451-456789" },
+        { hospital: "Mani Hospital", phone: "0451-567890" },
+        { hospital: "Sree Vijayalakshmi Hospital", phone: "0451-678901" },
+        { hospital: "Krishna Hospital", phone: "0451-789012" },
+        { hospital: "Modern Hospital", phone: "0451-890123" },
+        { hospital: "Lakshmi Hospital", phone: "0451-901234" },
+        { hospital: "Bharani Hospital", phone: "0451-012345" }
+    ],
+    erode: [
+        { hospital: "Erode Government Hospital", phone: "0424-123456" },
+        { hospital: "Kumarasamy Hospital", phone: "0424-234567" },
+        { hospital: "Sri Ram Hospital", phone: "0424-345678" },
+        { hospital: "Royal Hospital", phone: "0424-456789" },
+        { hospital: "Sree Vinayaka Hospital", phone: "0424-567890" },
+        { hospital: "Erode Heart and Multi-Specialty Hospital", phone: "0424-678901" },
+        { hospital: "Bhavani Hospital", phone: "0424-789012" },
+        { hospital: "Saravana Hospital", phone: "0424-890123" },
+        { hospital: "Thulasi Hospital", phone: "0424-901234" },
+        { hospital: "Sivasakthi Hospital", phone: "0424-012345" }
+    ],
+    hubli: [
+        { hospital: "KLE Hospital", phone: "0836-123456" },
+        { hospital: "Siddhi Hospital", phone: "0836-234567" },
+        { hospital: "Dr. Ambedkar Hospital", phone: "0836-345678" },
+        { hospital: "Shree Shivaji Hospital", phone: "0836-456789" },
+        { hospital: "Divine Hospital", phone: "0836-567890" },
+        { hospital: "Hubli Medical College", phone: "0836-678901" },
+        { hospital: "City Hospital", phone: "0836-789012" },
+        { hospital: "Shri Hanuman Hospital", phone: "0836-890123" },
+        { hospital: "Vaidya Hospital", phone: "0836-901234" },
+        { hospital: "Prathama Hospital", phone: "0836-012345" }
+    ],
+    hyderabad: [
+        { hospital: "Yashoda Hospital", phone: "040-12345678" },
+        { hospital: "Care Hospital", phone: "040-23456789" },
+        { hospital: "KIMS Hospital", phone: "040-34567890" },
+        { hospital: "Apollo Hospital", phone: "040-45678901" },
+        { hospital: "Rainbow Children's Hospital", phone: "040-56789012" },
+        { hospital: "MaxCure Hospital", phone: "040-67890123" },
+        { hospital: "Olive Hospital", phone: "040-78901234" },
+        { hospital: "Continental Hospital", phone: "040-89012345" },
+        { hospital: "Mediciti Hospital", phone: "040-90123456" },
+        { hospital: "Sarojini Devi Eye Hospital", phone: "040-01234567" }
+    ],
+    kakinada: [
+        { hospital: "Kakinada Government Hospital", phone: "0884-123456" },
+        { hospital: "KIMS Hospital", phone: "0884-234567" },
+        { hospital: "Sunshine Hospital", phone: "0884-345678" },
+        { hospital: "Raghava Hospital", phone: "0884-456789" },
+        { hospital: "Krishna Hospital", phone: "0884-567890" },
+        { hospital: "Sai Health Care Hospital", phone: "0884-678901" },
+        { hospital: "GMS Hospital", phone: "0884-789012" },
+        { hospital: "City Hospital", phone: "0884-890123" },
+        { hospital: "Mediciti Hospital", phone: "0884-901234" },
+        { hospital: "Sarada Hospital", phone: "0884-012345" }
+    ],
+    kannur: [
+        { hospital: "Aster MIMS", phone: "0497-123456" },
+        { hospital: "Kannur Government Medical College", phone: "0497-234567" },
+        { hospital: "Malabar Cancer Centre", phone: "0497-345678" },
+        { hospital: "Medical Trust Hospital", phone: "0497-456789" },
+        { hospital: "Sree Gokulam Medical College", phone: "0497-567890" },
+        { hospital: "Sree Raghavendra Hospital", phone: "0497-678901" },
+        { hospital: "Vishnu Hospital", phone: "0497-789012" },
+        { hospital: "Sree Krishna Hospital", phone: "0497-890123" },
+        { hospital: "New Life Hospital", phone: "0497-901234" },
+        { hospital: "Santhwana Hospital", phone: "0497-012345" }
+    ],
+    kadapa: [
+        { hospital: "Government General Hospital", phone: "08562-123456" },
+        { hospital: "Sri Sai Hospital", phone: "08562-234567" },
+        { hospital: "Sree Lakshmi Hospital", phone: "08562-345678" },
+        { hospital: "Veerendra Multi-specialty Hospital", phone: "08562-456789" },
+        { hospital: "Raghavendra Hospital", phone: "08562-567890" },
+        { hospital: "Sri Venkateswara Hospital", phone: "08562-678901" },
+        { hospital: "KIMS Hospital", phone: "08562-789012" },
+        { hospital: "New Life Hospital", phone: "08562-890123" },
+        { hospital: "Shree Devi Hospital", phone: "08562-901234" },
+        { hospital: "Lakshmi Hospital", phone: "08562-012345" }
+    ],
+    kottayam: [
+        { hospital: "Puthenpurackal Hospital", phone: "0481-123456" },
+        { hospital: "Kottayam Medical College", phone: "0481-234567" },
+        { hospital: "Believers Church Medical College", phone: "0481-345678" },
+        { hospital: "Sree Gokulam Medical College", phone: "0481-456789" },
+        { hospital: "Vishnu Hospital", phone: "0481-567890" },
+        { hospital: "Mother's Care Hospital", phone: "0481-678901" },
+        { hospital: "Care First Hospital", phone: "0481-789012" },
+        { hospital: "St. Thomas Hospital", phone: "0481-890123" },
+        { hospital: "New Life Hospital", phone: "0481-901234" },
+        { hospital: "Sree Krishna Hospital", phone: "0481-012345" }
+    ],
+    kochi: [
+        { hospital: "Lissie Hospital", phone: "0484-123456" },
+        { hospital: "Kochi Medical College", phone: "0484-234567" },
+        { hospital: "Aster Medcity", phone: "0484-345678" },
+        { hospital: "Rajagiri Hospital", phone: "0484-456789" },
+        { hospital: "Sree Gokulam Medical College", phone: "0484-567890" },
+        { hospital: "Mother's Care Hospital", phone: "0484-678901" },
+        { hospital: "Kochi Heart Institute", phone: "0484-789012" },
+        { hospital: "MIMS Kochi", phone: "0484-890123" },
+        { hospital: "St. Joseph's Hospital", phone: "0484-901234" },
+        { hospital: "PVS Hospital", phone: "0484-012345" }
+    ],
+    kolhapur: [
+        { hospital: "Shri Swami Vivekanand Hospital", phone: "0231-123456" },
+        { hospital: "Kolhapur Medical College", phone: "0231-234567" },
+        { hospital: "Jeevan Hospital", phone: "0231-345678" },
+        { hospital: "B.J. Medical College", phone: "0231-456789" },
+        { hospital: "Indira Gandhi Hospital", phone: "0231-567890" },
+        { hospital: "Gokul Hospital", phone: "0231-678901" },
+        { hospital: "Mahavir Hospital", phone: "0231-789012" },
+        { hospital: "Vijay Hospital", phone: "0231-890123" },
+        { hospital: "Rangoli Hospital", phone: "0231-901234" },
+        { hospital: "Kombayi Hospital", phone: "0231-012345" }
+    ],
+    kurnool: [
+        { hospital: "Kurnool Government Hospital", phone: "08518-123456" },
+        { hospital: "Gandhi Hospital", phone: "08518-234567" },
+        { hospital: "Sri Srinivasa Hospital", phone: "08518-345678" },
+        { hospital: "Vishnu Hospital", phone: "08518-456789" },
+        { hospital: "Sai Ram Hospital", phone: "08518-567890" },
+        { hospital: "KIMS Kurnool", phone: "08518-678901" },
+        { hospital: "Mother's Care Hospital", phone: "08518-789012" },
+        { hospital: "Pragathi Hospital", phone: "08518-890123" },
+        { hospital: "New Life Hospital", phone: "08518-901234" },
+        { hospital: "Shree Ram Hospital", phone: "08518-012345" }
+    ],
+    krishnagiri: [
+        { hospital: "Krishnagiri General Hospital", phone: "04343-123456" },
+        { hospital: "Sri Lakshmi Hospital", phone: "04343-234567" },
+        { hospital: "Sai Krishna Hospital", phone: "04343-345678" },
+        { hospital: "Raghavendra Hospital", phone: "04343-456789" },
+        { hospital: "Sri Venkateswara Hospital", phone: "04343-567890" },
+        { hospital: "Shree Sai Hospital", phone: "04343-678901" },
+        { hospital: "KIMS Hospital", phone: "04343-789012" },
+        { hospital: "Modern Hospital", phone: "04343-890123" },
+        { hospital: "Government Hospital", phone: "04343-901234" },
+        { hospital: "Aarogyam Hospital", phone: "04343-012345" }
+    ],
+    manjeri: [
+        { hospital: "Manjeri Medical College", phone: "0483-123456" },
+        { hospital: "New Life Hospital", phone: "0483-234567" },
+        { hospital: "Sree Gokulam Hospital", phone: "0483-345678" },
+        { hospital: "Sri Sai Hospital", phone: "0483-456789" },
+        { hospital: "KIMS Manjeri", phone: "0483-567890" },
+        { hospital: "Vishnu Hospital", phone: "0483-678901" },
+        { hospital: "Ayurvedic Hospital", phone: "0483-789012" },
+        { hospital: "Heart Care Hospital", phone: "0483-890123" },
+        { hospital: "Mother's Care Hospital", phone: "0483-901234" },
+        { hospital: "Health Care Hospital", phone: "0483-012345" }
+    ],
+    madurai: [
+        { hospital: "Meenakshi Mission Hospital", phone: "0452-123456" },
+        { hospital: "Madurai Government Hospital", phone: "0452-234567" },
+        { hospital: "Kamalakshi Hospital", phone: "0452-345678" },
+        { hospital: "Arul Hospital", phone: "0452-456789" },
+        { hospital: "Sree Kanchi Hospital", phone: "0452-567890" },
+        { hospital: "Sri Venkateshwara Medical Centre", phone: "0452-678901" },
+        { hospital: "Madurai Medical College", phone: "0452-789012" },
+        { hospital: "Tharini Hospital", phone: "0452-890123" },
+        { hospital: "City Hospital", phone: "0452-901234" },
+        { hospital: "Annai Hospital", phone: "0452-012345" }
+    ],
+    mangalore: [
+        { hospital: "Father Muller Medical College", phone: "0824-123456" },
+        { hospital: "Kasturba Medical College", phone: "0824-234567" },
+        { hospital: "Srinivas Hospital", phone: "0824-345678" },
+        { hospital: "Lions Hospital", phone: "0824-456789" },
+        { hospital: "Sakra Premium Hospital", phone: "0824-567890" },
+        { hospital: "City Hospital", phone: "0824-678901" },
+        { hospital: "New Mangalore Hospital", phone: "0824-789012" },
+        { hospital: "A J Hospital", phone: "0824-890123" },
+        { hospital: "Jeevadhara Hospital", phone: "0824-901234" },
+        { hospital: "Medical Trust Hospital", phone: "0824-012345" }
+    ],
+    nellore: [
+        { hospital: "Sri Venkateswara Hospital", phone: "0861-123456" },
+        { hospital: "Nellore General Hospital", phone: "0861-234567" },
+        { hospital: "Raghavendra Multi-Specialty Hospital", phone: "0861-345678" },
+        { hospital: "Sai Krishna Hospital", phone: "0861-456789" },
+        { hospital: "City Hospital", phone: "0861-567890" },
+        { hospital: "Nellore Medical College", phone: "0861-678901" },
+        { hospital: "Pragathi Hospital", phone: "0861-789012" },
+        { hospital: "Mother's Care Hospital", phone: "0861-890123" },
+        { hospital: "Sree Lakshmi Hospital", phone: "0861-901234" },
+        { hospital: "Shree Sai Hospital", phone: "0861-012345" }
+    ],
+    nizamabad: [
+        { hospital: "Nizamabad Government Hospital", phone: "08462-123456" },
+        { hospital: "Sai Baba Hospital", phone: "08462-234567" },
+        { hospital: "Shree Lakshmi Hospital", phone: "08462-345678" },
+        { hospital: "KIMS Nizamabad", phone: "08462-456789" },
+        { hospital: "Nizamabad Medical College", phone: "08462-567890" },
+        { hospital: "Raghavendra Hospital", phone: "08462-678901" },
+        { hospital: "Shree Sai Hospital", phone: "08462-789012" },
+        { hospital: "Sree Gokulam Hospital", phone: "08462-890123" },
+        { hospital: "Ayurvedic Hospital", phone: "08462-901234" },
+        { hospital: "Vishnu Hospital", phone: "08462-012345" }
+    ],
+    palakkad: [
+        { hospital: "Palakkad Government Hospital", phone: "0491-123456" },
+        { hospital: "Sree Gokulam Medical College", phone: "0491-234567" },
+        { hospital: "Vishnu Hospital", phone: "0491-345678" },
+        { hospital: "Sri Venkateswara Hospital", phone: "0491-456789" },
+        { hospital: "KIMS Hospital", phone: "0491-567890" },
+        { hospital: "Mother's Care Hospital", phone: "0491-678901" },
+        { hospital: "Aster MIMS", phone: "0491-789012" },
+        { hospital: "PVS Hospital", phone: "0491-890123" },
+        { hospital: "MIMS Palakkad", phone: "0491-901234" },
+        { hospital: "City Hospital", phone: "0491-012345" }
+    ],
+    puducherry: [
+        { hospital: "JIPMER", phone: "0413-123456" },
+        { hospital: "Sri Manakula Vinayagar Medical College", phone: "0413-234567" },
+        { hospital: "Kasturba Medical College", phone: "0413-345678" },
+        { hospital: "Pondicherry Institute of Medical Sciences", phone: "0413-456789" },
+        { hospital: "Aster Medcity", phone: "0413-567890" },
+        { hospital: "Mother Teresa Hospital", phone: "0413-678901" },
+        { hospital: "Indira Gandhi Medical College", phone: "0413-789012" },
+        { hospital: "New Life Hospital", phone: "0413-890123" },
+        { hospital: "Government General Hospital", phone: "0413-901234" },
+        { hospital: "Pondicherry General Hospital", phone: "0413-012345" }
+    ],
+    pondicherry: [
+        { hospital: "JIPMER", phone: "0413-123456" },
+        { hospital: "Sri Manakula Vinayagar Medical College", phone: "0413-234567" },
+        { hospital: "Kasturba Medical College", phone: "0413-345678" },
+        { hospital: "Pondicherry Institute of Medical Sciences", phone: "0413-456789" },
+        { hospital: "Aster Medcity", phone: "0413-567890" },
+        { hospital: "Mother Teresa Hospital", phone: "0413-678901" },
+        { hospital: "Indira Gandhi Medical College", phone: "0413-789012" },
+        { hospital: "New Life Hospital", phone: "0413-890123" },
+        { hospital: "Government General Hospital", phone: "0413-901234" },
+        { hospital: "Pondicherry General Hospital", phone: "0413-012345" }
+    ],
+    raichur: [
+        { hospital: "Raichur Government Hospital", phone: "08532-123456" },
+        { hospital: "KIMS Raichur", phone: "08532-234567" },
+        { hospital: "Shree Sai Hospital", phone: "08532-345678" },
+        { hospital: "City Hospital", phone: "08532-456789" },
+        { hospital: "Krishna Hospital", phone: "08532-567890" },
+        { hospital: "Raghavendra Hospital", phone: "08532-678901" },
+        { hospital: "Sri Lakshmi Hospital", phone: "08532-789012" },
+        { hospital: "Mediwell Hospital", phone: "08532-890123" },
+        { hospital: "Sree Venkateswara Hospital", phone: "08532-901234" },
+        { hospital: "Shree Krishna Hospital", phone: "08532-012345" }
+    ],
+    ranipet: [
+        { hospital: "Ranipet Government Hospital", phone: "04172-123456" },
+        { hospital: "Sree Lakshmi Hospital", phone: "04172-234567" },
+        { hospital: "Raghavendra Multi-specialty Hospital", phone: "04172-345678" },
+        { hospital: "Krishna Hospital", phone: "04172-456789" },
+        { hospital: "New Life Hospital", phone: "04172-567890" },
+        { hospital: "City Hospital", phone: "04172-678901" },
+        { hospital: "Sree Sai Hospital", phone: "04172-789012" },
+        { hospital: "Vishnu Hospital", phone: "04172-890123" },
+        { hospital: "Sri Venkateswara Hospital", phone: "04172-901234" },
+        { hospital: "Pragathi Hospital", phone: "04172-012345" }
+    ],
+    salem: [
+        { hospital: "Salem Government Hospital", phone: "0427-123456" },
+        { hospital: "Rohini Hospital", phone: "0427-234567" },
+        { hospital: "Sri Gokulam Hospital", phone: "0427-345678" },
+        { hospital: "Kumaran Hospital", phone: "0427-456789" },
+        { hospital: "Muthu Hospital", phone: "0427-567890" },
+        { hospital: "Annai Hospital", phone: "0427-678901" },
+        { hospital: "KIMS Salem", phone: "0427-789012" },
+        { hospital: "Shree Sai Hospital", phone: "0427-890123" },
+        { hospital: "Vasanth Hospital", phone: "0427-901234" },
+        { hospital: "Sakthi Hospital", phone: "0427-012345" }
+    ],
+    sivakasi: [
+        { hospital: "Sivakasi Government Hospital", phone: "04562-123456" },
+        { hospital: "Sri Saran Medical Centre", phone: "04562-234567" },
+        { hospital: "Sri Venkateshwara Hospital", phone: "04562-345678" },
+        { hospital: "Sree Ramachandra Hospital", phone: "04562-456789" },
+        { hospital: "Vishnu Hospital", phone: "04562-567890" },
+        { hospital: "Raghavendra Hospital", phone: "04562-678901" },
+        { hospital: "Pragathi Hospital", phone: "04562-789012" },
+        { hospital: "Sivakasi City Hospital", phone: "04562-890123" },
+        { hospital: "Sivakasi Medical College", phone: "04562-901234" },
+        { hospital: "Sai Hospital", phone: "04562-012345" }
+    ],
+    tanjore: [
+        { hospital: "Tanjore Government Medical College", phone: "04362-123456" },
+        { hospital: "Sri Ramachandra Medical Centre", phone: "04362-234567" },
+        { hospital: "Sree Venkateshwara Hospital", phone: "04362-345678" },
+        { hospital: "Arumugham Hospital", phone: "04362-456789" },
+        { hospital: "Kumaran Hospital", phone: "04362-567890" },
+        { hospital: "Thiruvarur Government Hospital", phone: "04362-678901" },
+        { hospital: "Raghavendra Hospital", phone: "04362-789012" },
+        { hospital: "Sakthi Hospital", phone: "04362-890123" },
+        { hospital: "Sree Gokulam Hospital", phone: "04362-901234" },
+        { hospital: "Muthu Hospital", phone: "04362-012345" }
+    ],
+    tiruvannamalai: [
+        { hospital: "Tiruvannamalai Government Hospital", phone: "04175-123456" },
+        { hospital: "Sri Ramana Maharshi Hospital", phone: "04175-234567" },
+        { hospital: "Annai Hospital", phone: "04175-345678" },
+        { hospital: "Sri Lakshmi Hospital", phone: "04175-456789" },
+        { hospital: "Vishnu Hospital", phone: "04175-567890" },
+        { hospital: "Tiruvannamalai Medical College", phone: "04175-678901" },
+        { hospital: "Sree Venkateshwara Hospital", phone: "04175-789012" },
+        { hospital: "Kumaran Hospital", phone: "04175-890123" },
+        { hospital: "Arumugham Hospital", phone: "04175-901234" },
+        { hospital: "Sakthi Hospital", phone: "04175-012345" }
+    ],
+    tirunelveli: [
+        { hospital: "Tirunelveli Medical College", phone: "0462-123456" },
+        { hospital: "KIMS Tirunelveli", phone: "0462-234567" },
+        { hospital: "Raghavendra Hospital", phone: "0462-345678" },
+        { hospital: "Sree Venkateshwara Hospital", phone: "0462-456789" },
+        { hospital: "Vishnu Hospital", phone: "0462-567890" },
+        { hospital: "Sakthi Hospital", phone: "0462-678901" },
+        { hospital: "Sri Saran Medical Centre", phone: "0462-789012" },
+        { hospital: "Arumugham Hospital", phone: "0462-890123" },
+        { hospital: "Muthu Hospital", phone: "0462-901234" },
+        { hospital: "Tharini Hospital", phone: "0462-012345" }
+    ],
+    tirupur: [
+        { hospital: "Tirupur Government Hospital", phone: "0421-123456" },
+        { hospital: "Sakthi Hospital", phone: "0421-234567" },
+        { hospital: "Sri Ramachandra Hospital", phone: "0421-345678" },
+        { hospital: "Vishnu Hospital", phone: "0421-456789" },
+        { hospital: "Kumaran Hospital", phone: "0421-567890" },
+        { hospital: "Sri Venkateshwara Medical Centre", phone: "0421-678901" },
+        { hospital: "Muthu Hospital", phone: "0421-789012" },
+        { hospital: "City Hospital", phone: "0421-890123" },
+        { hospital: "Raghavendra Hospital", phone: "0421-901234" },
+        { hospital: "Sree Lakshmi Hospital", phone: "0421-012345" }
+    ],
+    trichy: [
+        { hospital: "Trichy Government Hospital", phone: "0431-123456" },
+        { hospital: "Sakthi Hospital", phone: "0431-234567" },
+        { hospital: "Raghavendra Hospital", phone: "0431-345678" },
+        { hospital: "Sri Venkateshwara Hospital", phone: "0431-456789" },
+        { hospital: "Vishnu Hospital", phone: "0431-567890" },
+        { hospital: "Sri Ramachandra Hospital", phone: "0431-678901" },
+        { hospital: "Kumaran Hospital", phone: "0431-789012" },
+        { hospital: "Sree Lakshmi Hospital", phone: "0431-890123" },
+        { hospital: "Shree Sai Hospital", phone: "0431-901234" },
+        { hospital: "Muthu Hospital", phone: "0431-012345" }
+    ],
+    vijayawada: [
+        { hospital: "Vijayawada Government Hospital", phone: "0866-123456" },
+        { hospital: "Raghavendra Multi-Specialty Hospital", phone: "0866-234567" },
+        { hospital: "KIMS Vijayawada", phone: "0866-345678" },
+        { hospital: "City Hospital", phone: "0866-456789" },
+        { hospital: "Sri Venkateshwara Hospital", phone: "0866-567890" },
+        { hospital: "Sakthi Hospital", phone: "0866-678901" },
+        { hospital: "Sri Ramachandra Hospital", phone: "0866-789012" },
+        { hospital: "Pragathi Hospital", phone: "0866-890123" },
+        { hospital: "Arogya Hospital", phone: "0866-901234" },
+        { hospital: "Vishnu Hospital", phone: "0866-012345" }
+    ],
+    vizag: [
+        { hospital: "Visakhapatnam Government Hospital", phone: "0891-123456" },
+        { hospital: "KIMS Visakhapatnam", phone: "0891-234567" },
+        { hospital: "Gayatri Hospital", phone: "0891-345678" },
+        { hospital: "City Hospital", phone: "0891-456789" },
+        { hospital: "Sri Venkateshwara Hospital", phone: "0891-567890" },
+        { hospital: "Sree Lakshmi Hospital", phone: "0891-678901" },
+        { hospital: "Lions Club Hospital", phone: "0891-789012" },
+        { hospital: "Pragathi Hospital", phone: "0891-890123" },
+        { hospital: "Vishnu Hospital", phone: "0891-901234" },
+        { hospital: "Arogya Hospital", phone: "0891-012345" }
+    ],
+    warangal: [
+        { hospital: "Warangal Government Hospital", phone: "0870-123456" },
+        { hospital: "KIMS Warangal", phone: "0870-234567" },
+        { hospital: "Raghavendra Hospital", phone: "0870-345678" },
+        { hospital: "Vishnu Hospital", phone: "0870-456789" },
+        { hospital: "Sree Lakshmi Hospital", phone: "0870-567890" },
+        { hospital: "Sri Venkateshwara Hospital", phone: "0870-678901" },
+        { hospital: "City Hospital", phone: "0870-789012" },
+        { hospital: "Sakthi Hospital", phone: "0870-890123" },
+        { hospital: "Shree Sai Hospital", phone: "0870-901234" },
+        { hospital: "Muthu Hospital", phone: "0870-012345" }
+    ],
+    tamilnadu: [
+        { hospital: "Government General Hospital, Chennai", phone: "044-12345678" },
+        { hospital: "Fortis Malar Hospital", phone: "044-23456789" },
+        { hospital: "Sakra Premium Hospital", phone: "044-34567890" },
+        { hospital: "MIOT International", phone: "044-45678901" },
+        { hospital: "Sri Ramachandra Medical Centre", phone: "044-56789012" },
+        { hospital: "Apollo Hospital, Chennai", phone: "044-67890123" },
+        { hospital: "Rajiv Gandhi Government General Hospital", phone: "044-78901234" },
+        { hospital: "Kovai Medical Center and Hospital", phone: "0422-89012345" },
+        { hospital: "Vijaya Hospital, Chennai", phone: "044-90123456" },
+        { hospital: "Sree Harshitha Hospital", phone: "044-01234567" }
+    ],
+    karnataka: [
+        { hospital: "Bangalore Medical College", phone: "080-12345678" },
+        { hospital: "Manipal Hospital", phone: "080-23456789" },
+        { hospital: "St. John's Hospital", phone: "080-34567890" },
+        { hospital: "Narayana Health", phone: "080-45678901" },
+        { hospital: "Sakra Premium Hospital", phone: "080-56789012" },
+        { hospital: "Cloudnine Hospital", phone: "080-67890123" },
+        { hospital: "Fortis La Femme Hospital", phone: "080-78901234" },
+        { hospital: "Rajarajeshwari Medical College", phone: "080-89012345" },
+        { hospital: "Vydehi Hospital", phone: "080-90123456" },
+        { hospital: "Koshys Hospital", phone: "080-01234567" }
+    ],
+    andhrapradesh: [
+        { hospital: "Andhra Medical College", phone: "0891-123456" },
+        { hospital: "KIMS Hospital, Visakhapatnam", phone: "0891-234567" },
+        { hospital: "Dr. YSR Aarogyasri Hospital", phone: "0891-345678" },
+        { hospital: "MGM Hospital", phone: "0891-456789" },
+        { hospital: "Prathima Hospital", phone: "0891-567890" },
+        { hospital: "Visakhapatnam Government Hospital", phone: "0891-678901" },
+        { hospital: "Sri Venkateswara Hospital", phone: "0891-789012" },
+        { hospital: "Lions Club Hospital", phone: "0891-890123" },
+        { hospital: "Sree Lakshmi Hospital", phone: "0891-901234" },
+        { hospital: "Arogya Hospital", phone: "0891-012345" }
+    ],
+    kerala: [
+        { hospital: "Medical College Hospital, Trivandrum", phone: "0471-123456" },
+        { hospital: "Lissie Hospital, Kochi", phone: "0484-234567" },
+        { hospital: "Kochi Medical College", phone: "0484-345678" },
+        { hospital: "Aster Medcity, Kochi", phone: "0484-456789" },
+        { hospital: "Sree Chitra Tirunal Institute", phone: "0471-567890" },
+        { hospital: "MGM Hospital, Ernakulam", phone: "0484-678901" },
+        { hospital: "Baby Memorial Hospital, Kozhikode", phone: "0495-789012" },
+        { hospital: "KIMS Hospital, Trivandrum", phone: "0471-890123" },
+        { hospital: "PVS Memorial Hospital", phone: "0484-901234" },
+        { hospital: "Kochi AIMS Hospital", phone: "0484-012345" }
+    ],
+    telangana: [
+        { hospital: "Osmania General Hospital", phone: "040-12345678" },
+        { hospital: "KIMS Hospital, Hyderabad", phone: "040-23456789" },
+        { hospital: "Care Hospital, Hyderabad", phone: "040-34567890" },
+        { hospital: "Global Hospitals, Hyderabad", phone: "040-45678901" },
+        { hospital: "Yashoda Hospitals, Hyderabad", phone: "040-56789012" },
+        { hospital: "Apollo Hospitals, Hyderabad", phone: "040-67890123" },
+        { hospital: "Maxcare Hospital", phone: "040-78901234" },
+        { hospital: "Sunshine Hospital", phone: "040-89012345" },
+        { hospital: "Mediciti Hospital", phone: "040-90123456" },
+        { hospital: "Aster Prime Hospital", phone: "040-01234567" }
+    ],
+    kolar: [
+        { hospital: "Government Hospital, Kolar", phone: "08152-123456" },
+        { hospital: "Sakra Premium Hospital, Kolar", phone: "08152-234567" },
+        { hospital: "Kolar Medical College", phone: "08152-345678" },
+        { hospital: "Sri Lakshmi Hospital", phone: "08152-456789" },
+        { hospital: "Shree Sai Hospital", phone: "08152-567890" },
+        { hospital: "Arogya Hospital", phone: "08152-678901" },
+        { hospital: "Sri Ramana Maharshi Hospital", phone: "08152-789012" },
+        { hospital: "Shree Gokulam Hospital", phone: "08152-890123" },
+        { hospital: "Raghavendra Hospital", phone: "08152-901234" },
+        { hospital: "Arumugham Hospital", phone: "08152-012345" }
+    ],
+    palani: [
+        { hospital: "Government Hospital, Palani", phone: "04549-123456" },
+        { hospital: "Sri Ramachandra Medical Centre", phone: "04549-234567" },
+        { hospital: "Vishnu Hospital, Palani", phone: "04549-345678" },
+        { hospital: "Arumugham Hospital", phone: "04549-456789" },
+        { hospital: "Vijaya Hospital", phone: "04549-567890" },
+        { hospital: "Sakthi Hospital", phone: "04549-678901" },
+        { hospital: "Pragathi Hospital", phone: "04549-789012" },
+        { hospital: "Shree Sai Hospital", phone: "04549-890123" },
+        { hospital: "Sri Gokulam Hospital", phone: "04549-901234" },
+        { hospital: "Muthu Hospital", phone: "04549-012345" }
+    ],
+    tindivanam: [
+        { hospital: "Tindivanam Government Hospital", phone: "04147-123456" },
+        { hospital: "Sri Saran Medical Centre", phone: "04147-234567" },
+        { hospital: "Arumugham Hospital", phone: "04147-345678" },
+        { hospital: "Vishnu Hospital", phone: "04147-456789" },
+        { hospital: "Muthu Hospital", phone: "04147-567890" },
+        { hospital: "Sree Venkateshwara Hospital", phone: "04147-678901" },
+        { hospital: "Kumaran Hospital", phone: "04147-789012" },
+        { hospital: "Pragathi Hospital", phone: "04147-890123" },
+        { hospital: "Raghavendra Hospital", phone: "04147-901234" },
+        { hospital: "Shree Sai Hospital", phone: "04147-012345" }
+    ],
+    chittoor: [
+        { hospital: "Chittoor Government Hospital", phone: "08572-123456" },
+        { hospital: "Sakthi Hospital", phone: "08572-234567" },
+        { hospital: "Sri Lakshmi Hospital", phone: "08572-345678" },
+        { hospital: "Kumaran Hospital", phone: "08572-456789" },
+        { hospital: "Pragathi Hospital", phone: "08572-567890" },
+        { hospital: "Raghavendra Hospital", phone: "08572-678901" },
+        { hospital: "Vishnu Hospital", phone: "08572-789012" },
+        { hospital: "Muthu Hospital", phone: "08572-890123" },
+        { hospital: "Shree Sai Hospital", phone: "08572-901234" },
+        { hospital: "Shree Gokulam Hospital", phone: "08572-012345" }
+    ],
+    vijayanagaram: [
+        { hospital: "Vijayanagaram Government Hospital", phone: "08922-123456" },
+        { hospital: "KIMS Vijayanagaram", phone: "08922-234567" },
+        { hospital: "Raghavendra Hospital", phone: "08922-345678" },
+        { hospital: "Sri Lakshmi Hospital", phone: "08922-456789" },
+        { hospital: "Vishnu Hospital", phone: "08922-567890" },
+        { hospital: "Arumugham Hospital", phone: "08922-678901" },
+        { hospital: "Shree Sai Hospital", phone: "08922-789012" },
+        { hospital: "Pragathi Hospital", phone: "08922-890123" },
+        { hospital: "Shree Gokulam Hospital", phone: "08922-901234" },
+        { hospital: "Muthu Hospital", phone: "08922-012345" }
+    ],
+    rayachoti: [
+        { hospital: "Rayachoti Government Hospital", phone: "08571-123456" },
+        { hospital: "Sri Sai Hospital", phone: "08571-234567" },
+        { hospital: "Kumaran Hospital", phone: "08571-345678" },
+        { hospital: "Shree Lakshmi Hospital", phone: "08571-456789" },
+        { hospital: "Muthu Hospital", phone: "08571-567890" },
+        { hospital: "Pragathi Hospital", phone: "08571-678901" },
+        { hospital: "Raghavendra Hospital", phone: "08571-789012" },
+        { hospital: "Vishnu Hospital", phone: "08571-890123" },
+        { hospital: "Shree Sai Hospital", phone: "08571-901234" },
+        { hospital: "Shree Gokulam Hospital", phone: "08571-012345" }
+    ]
+};
+
+
+
+        // Show ambulance services based on selected region
+        function showAmbulanceServices() {
+            const city = document.getElementById("city-select").value;
+            const servicesContainer = document.getElementById("services-container");
+            const ambulanceServices = document.getElementById("ambulance-services");
+
+            // Clear previous data
+            servicesContainer.innerHTML = "";
+
+            if (city && ambulanceData[city]) {
+                // Show ambulance services
+                ambulanceServices.style.display = "block";
+                ambulanceData[city].forEach((service, index) => {
+                    const serviceDiv = document.createElement("div");
+                    serviceDiv.classList.add("service");
+
+                    serviceDiv.innerHTML = ` 
+                        <h3>${index + 1}. ${service.hospital}</h3>
+                        <p>Phone: ${service.phone}</p>
+                        <button onclick="callAmbulance('${service.phone}')">Call Ambulance</button>
+                    `;
+                    servicesContainer.appendChild(serviceDiv);
+                });
+            } else {
+                ambulanceServices.style.display = "none";  // Hide services if no city is selected or data doesn't exist
+            }
+        }
+
+        // Function to call the ambulance (could be linked to phone dialer)
+        function callAmbulance(phoneNumber) {
+            window.location.href = `tel:${phoneNumber}`;
+        }
+    </script>
+
+</body>
+</html>

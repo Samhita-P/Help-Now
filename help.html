@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HelpNow</title>
+  <style>
+    /* Styles for HelpNow Homepage */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: white;
+    }
+
+    header {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      width: 80%;
+      margin: auto;
+    }
+
+    .logo-space {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; /* Keeps the image circular */
+  object-fit: cover; /* Ensures the image fits within the circle */
+  border: 2px solid #ddd; /* Adds a border around the image */
+}
+
+    .branding h1 {
+      margin: 0;
+      color: #d32f2f;
+      font-size: 2rem;
+    }
+
+    .branding p {
+      margin: 5px 0 0;
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    .button-container {
+      margin: 40px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 800px;
+    }
+
+    button {
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    button.large-btn {
+      background-color: #d32f2f;
+      color: white;
+      font-size: 1.1rem;
+      box-shadow: 0px 4px 6px #d32f2f80;
+    }
+
+    button.large-btn:hover {
+      background-color: #b71c1c;
+    }
+
+    button.small-btn {
+      background-color: #d32f2f;
+      color: white;
+      font-size: 1.1rem;
+      padding: 10px;
+      box-shadow: 0px 3px 5px #d32f2f80;
+    }
+
+    button.small-btn:hover {
+      background-color: #b71c1c;
+    }
+
+    footer {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #ffffff;
+      border-top: 2px solid #000000;
+      color: #000000;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <div class="logo-space">
+         <img 
+    class="logo-space" 
+    src="https://i.postimg.cc/3rvQ0Z0r/Screenshot-639.png" 
+    alt="HelpNow Logo"
+  >
+      </div> <!-- Space for the logo -->
+      <div class="branding">
+        <h1>HelpNow</h1>
+        <p>First Aid Help at Your Fingertips</p>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="button-container">
+      <button class="large-btn" onclick="location.href='symptomchecker.html';">Symptom Checker</button>
+      <button class="large-btn" onclick="location.href='firstaidguide.html';">First Aid Guides</button>
+      <button class="large-btn" onclick="location.href='chatbot.html';">Chatbot</button>
+      <button class="large-btn" onclick="location.href='emergencysos.html';">Emergency SOS</button>
+      <button class="large-btn" onclick="location.href='healthtips.html';">Health Tips</button>
+      <button class="large-btn" onclick="location.href='videos.html';">Videos and Tutorials</button>
+      <button class="large-btn" onclick="location.href='contactemergency.html';">Contact Emergency Services</button>
+      <button class="large-btn" onclick="location.href='checklist.html';">First Aid Checklist</button>
+      <button class="large-btn" onclick="location.href='locbased.html';">Location-Based First Aid</button>
+      <button class="small-btn" onclick="location.href='success.html';">Testimonials / Success Stories</button>
+      <button class="small-btn" onclick="location.href='feedback.html';">Feedback</button>
+      <button class="small-btn" onclick="location.href='aboutus.html';">About Us</button>
+    </div>
+  </main>
+  <footer>
+    &copy; 2024 Help Now. All Rights Reserved.
+  </footer>
+</body>
+</html>

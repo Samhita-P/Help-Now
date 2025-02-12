@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Tips</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .tip {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 4px 0;
+            color: #d9534f;
+            font-weight: bold;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #d9534f;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Health Tips</h1>
+
+        <div id="health-tips-container">
+            <div class="tip">Drink at least 8 glasses of water a day to stay hydrated.</div>
+            <div class="tip">Eat a balanced diet rich in fruits and vegetables.</div>
+            <div class="tip">Exercise for at least 30 minutes a day.</div>
+            <div class="tip">Get 7-8 hours of sleep each night for optimal health.</div>
+            <div class="tip">Wash your hands frequently to prevent infections.</div>
+            <div class="tip">Avoid smoking and excessive alcohol consumption.</div>
+            <div class="tip">Take short breaks throughout the day to avoid stress.</div>
+            <div class="tip">Limit processed foods and choose whole, natural foods.</div>
+            <div class="tip">Practice mindfulness or meditation to reduce anxiety.</div>
+            <div class="tip">Maintain a healthy weight through proper diet and exercise.</div>
+            <div class="tip">Avoid excessive screen time and take regular breaks.</div>
+            <div class="tip">Reduce sugar intake to maintain energy levels.</div>
+            <div class="tip">Get regular health check-ups and screenings.</div>
+            <div class="tip">Use sunscreen to protect your skin from harmful UV rays.</div>
+            <div class="tip">Wear a helmet while biking or riding a motorcycle.</div>
+            <div class="tip">Keep your home free from harmful chemicals and pollutants.</div>
+            <div class="tip">Practice good posture to avoid back and neck pain.</div>
+            <div class="tip">Brush your teeth twice a day and floss regularly.</div>
+            <div class="tip">Take the stairs instead of the elevator for extra exercise.</div>
+            <div class="tip">Incorporate strength training exercises into your routine.</div>
+            <div class="tip">Include healthy fats in your diet, like avocados and nuts.</div>
+            <div class="tip">Avoid drinking sugary beverages like soda and energy drinks.</div>
+            <div class="tip">Stretch regularly to improve flexibility.</div>
+            <div class="tip">Choose whole grains over refined grains for better health.</div>
+            <div class="tip">Get fresh air and natural sunlight every day.</div>
+            <div class="tip">Maintain a healthy gut by consuming probiotic-rich foods.</div>
+            <div class="tip">Reduce your intake of caffeine and opt for herbal teas.</div>
+            <div class="tip">Practice deep breathing exercises for relaxation.</div>
+            <div class="tip">Spend time with family and friends to boost emotional health.</div>
+            <div class="tip">Limit red meat consumption and include more plant-based foods.</div>
+            <div class="tip">Avoid eating heavy meals right before bedtime.</div>
+            <div class="tip">Limit your intake of salt to reduce blood pressure.</div>
+            <div class="tip">Stay up to date with vaccinations to prevent disease.</div>
+            <div class="tip">Take care of your mental health by seeking help if needed.</div>
+            <div class="tip">Wear proper footwear to prevent foot problems.</div>
+            <div class="tip">Avoid long periods of sitting; stand or walk regularly.</div>
+            <div class="tip">Keep a positive attitude and practice gratitude.</div>
+            <div class="tip">Choose cooking methods that preserve nutrients (e.g., steaming).</div>
+            <div class="tip">Avoid eating too much processed meat.</div>
+            <div class="tip">Be mindful of portion sizes to prevent overeating.</div>
+            <div class="tip">Include omega-3 fatty acids in your diet (found in fish).</div>
+            <div class="tip">Avoid eating fast food regularly.</div>
+            <div class="tip">Keep a food journal to monitor your eating habits.</div>
+            <div class="tip">Get enough fiber in your diet for good digestion.</div>
+            <div class="tip">Minimize stress with hobbies and activities you enjoy.</div>
+            <div class="tip">Reduce alcohol consumption to avoid long-term health issues.</div>
+            <div class="tip">Stay active, even with low-intensity activities like walking.</div>
+            <div class="tip">Check your blood pressure regularly, especially if you are at risk.</div>
+            <div class="tip">Take breaks to rest your eyes when using digital screens.</div>
+            <div class="tip">Avoid skipping meals to maintain energy levels throughout the day.</div>
+        </div>
+
+        <div class="button-container">
+            <button onclick="addNewTip()">Add New Tip</button>
+        </div>
+    </div>
+
+    <script>
+        function addNewTip() {
+            let newTip = prompt("Enter a new health tip:");
+            if (newTip) {
+                let tipContainer = document.getElementById('health-tips-container');
+                let newTipElement = document.createElement('div');
+                newTipElement.classList.add('tip');
+                newTipElement.textContent = newTip;
+                tipContainer.appendChild(newTipElement);
+            }
+        }
+    </script>
+
+</body>
+</html>
