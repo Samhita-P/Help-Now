@@ -1,7 +1,4 @@
 # HelpNow - First Aid Help at Your Fingertips
-
-![HelpNow Banner](https://via.placeholder.com/1200x400?text=HelpNow+-+First+Aid+Help+at+Your+Fingertips)
-
 ## 🏥 About HelpNow
 HelpNow is a virtual first aid room designed to provide quick and easy access to essential first aid information, emergency alerts, and medical assistance. The platform aims to help users take immediate action during emergencies by offering localized first aid guidance, video tutorials, and an emergency contact system.
 
@@ -52,19 +49,9 @@ cd HelpNow
 1. Open `index.html` in your browser
 2. Or use a live server extension in VS Code
 
-## 🔗 Live Demo
-You can check out the live demo here: **[Live Demo](https://yourwebsite.com/helpnow)**
-
 ## 📜 License
 This project is licensed under the [MIT License](LICENSE).
 
-## 🤝 Contributing
-We welcome contributions! To contribute:
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature-branch`)
-3. Commit your changes (`git commit -m 'Added a new feature'`)
-4. Push to the branch (`git push origin feature-branch`)
-5. Open a Pull Request
 
 ## 📧 Contact
 For any queries or feedback, contact:
